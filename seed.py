@@ -1,8 +1,8 @@
 import datetime
 from sqlalchemy import func
 
-from model import User, connect_to_db, db, Neighborhood, Restaurant,
-                    Restaurant_comment, Place, Place_comment
+from model import User, connect_to_db, db, Status, Neighborhood,
+                    Restaurant_reaction, Place, Place_comment
 
 from server import app
 

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h2>Neighborhoods</h2>
+
+    <div id="neighborhood-list" class="row">
+      {% for n in neigborhoods %}
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 melon-summary">
+
+              <div class="well">
+                  <h3><a href="/melon/{{ melon.melon_id }}">{{ melon.common_name }}</a></h3>
+                  <a href="/melon/{{ melon.melon_id }}">
+                      <img src="{{ melon.image_url }}" class="img-circle">
+                  </a>
+
+                  <div class="price">{{ melon.price_str() }}</div>
+                  <a class="btn btn-primary" href="/melon/{{ melon.melon_id }}">Details</a>
+              </div>
+
+          </div>
+      {% endfor %}
+    </div>
+
+{% endblock %}
