@@ -98,10 +98,10 @@ def logout():
 def neighborhood_list():
     """Show list of neighborhoods."""
 
-    neighborhoods = Neighborhood.query.order_by('title').all()
+    neighborhood = Neighborhood.query.all()
 
 
-    return render_template("neighborhoods.html", neighborhoods=neighborhoods)
+    return render_template("neighborhoods.html", neighborhood=neighborhood)
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>", methods=['GET'])
@@ -110,7 +110,7 @@ def neighborhood_page(neighborhood_id):
 
     neighborhood = neighborhood.query.get(neighborhood_id)
 
-    return render_template("specific_neighborhoods.html")
+    return render_template("specific_neighborhoods.html", neighborhood=neighborhood)
 
 
 @app.route("/neighborhoods/<int:neighborhood_id/restaurant>", methods=['GET'])
@@ -125,10 +125,11 @@ def restaurant_page(neighborhood_id):
 
 
 @app.route("/neighborhoods/<int:neighborhood_id/places>", methods=['GET'])
-def places_page(neighborhood_id):
+def places_page(places_id):
     """Show list of places in specific neighborhood."""
 
     neighborhood = neighborhood.query.get(neighborhood_id)
+    place = place.query.get(places_id)
 
     return render_template("places.html")
 

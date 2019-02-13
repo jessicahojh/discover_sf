@@ -18,12 +18,12 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    fname = db.Column(db.String(50, nullable=False))
-    lname = db.Column(db.String(50, nullable=False))
+    fname = db.Column(db.String(50), nullable=False)
+    lname = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(50), nullable=False)
-    status_code = db.Column(db.Integer, db.ForeignKey('Status.status_code'))
-    image = 
+    status_code = db.Column(db.Integer, db.ForeignKey('status.status_code'))
+    #image = 
 
     status = db.relationship("Status", backref="users")
 
@@ -57,7 +57,7 @@ class Neighborhood(db.Model): # for referential integrity
     neighborhood_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(500), nullable=False)
-    image = 
+    #image = 
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -99,7 +99,7 @@ class Place(db.Model):  # for referential integrity
     place_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(100))
     neighborhood_id = db.Column(db.Integer, db.ForeignKey('Neighborhood.neighborhood_id'))
-    image = 
+    #image = 
 
     neighborhood = db.relationship("Neighborhood", backref="places")
 
