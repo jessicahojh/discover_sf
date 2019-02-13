@@ -3,10 +3,13 @@
 from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, flash, redirect, session
-from flask_debugtoolbar import DebugToolbarExtension
+#from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, db, User, Status, Neighborhood,
-                    Restaurant_reaction, Place, Place_comment
+from model import connect_to_db, db, User, Status, Neighborhood, Restaurant_reaction, Place, Place_comment
+
+import requests
+
+YELP_URL = "https://api.yelp.com/v3/businesses/search"
 
 
 app = Flask(__name__)
@@ -113,18 +116,21 @@ def neighborhood_page(neighborhood_id):
     return render_template("specific_neighborhoods.html", neighborhood=neighborhood)
 
 
-@app.route("/neighborhoods/<int:neighborhood_id/restaurant>", methods=['GET'])
+@app.route("/neighborhoods/<int:neighborhood_id>/restaurant", methods=['GET'])
 def restaurant_page(neighborhood_id):
     """Show list of the top 5 restaurants in specific neighborhood.
 
     If a user is logged in, let them add a reaction/comment."""
 
-    neighborhood = neighborhood.query.get(neighborhood_id)
-
-    return render_template("restaurants.html")
+    neighborhood = Neighborhood.query.get(neighborhood_id)
 
 
-@app.route("/neighborhoods/<int:neighborhood_id/places>", methods=['GET'])
+
+    response = requests.get(YELP_URL)
+    data = response.json()
+
+
+@app.route("/neighborhoods/<int:neighborhood_id>/places", methods=['GET'])
 def places_page(places_id):
     """Show list of places in specific neighborhood."""
 
@@ -134,7 +140,7 @@ def places_page(places_id):
     return render_template("places.html")
 
 
-@app.route("/neighborhoods/<int:neighborhood_id/places/<int:place_id>", methods=['GET'])
+@app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['GET'])
 def places_page(neighborhood_id):
     """Show list of places in specific neighborhood.
 
@@ -269,6 +275,6 @@ if __name__ == "__main__":
     connect_to_db(app)
 
     # Use the DebugToolbar
-    DebugToolbarExtension(app)
+    #DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")

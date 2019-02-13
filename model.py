@@ -26,13 +26,11 @@ class User(db.Model):
     #image = 
 
     status = db.relationship("Status", backref="users")
-
+ 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"<User user_id={self.user_id} fname={self.fname} lname={
-                self.lname} email={self.email} password={self.password
-                } status_code={self.status_code}>"
+        return f"<User user_id={self.user_id} fname={self.fname} lname={self.lname} email={self.email} password={self.password} status_code={self.status_code}>"
 
 class Status(db.Model): # for referential integrity
     """Resident or visitor status for user."""
@@ -62,8 +60,7 @@ class Neighborhood(db.Model): # for referential integrity
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"<Neighborhood neighborhood_id={self.neighborhood_id} name={
-                    self.name}>"
+        return f"<Neighborhood neighborhood_id={self.neighborhood_id} name={self.name}>"
 
 
 
@@ -87,9 +84,7 @@ class Restaurant_reaction(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"<Restaurant_reaction reaction_id={self.reaction_id} user_id={
-        self.user_id} comment={self.comment} date={self.date} neighborhood_id={
-        self.neighborhood_id}>"
+        return f"<Restaurant_reaction reaction_id={self.reaction_id} user_id={self.user_id} comment={self.comment} date={self.date} neighborhood_id={self.neighborhood_id}>"
 
 class Place(db.Model):  # for referential integrity
     """Places to visit on website."""
@@ -124,14 +119,12 @@ class Place_comment(db.Model):
     user = db.relationship("User", backref="place_comments")
 
     # Define relationship to place
-    place = db.relationship("Place" backref="place_comments")
+    place = db.relationship("Place", backref="place_comments")
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"<Place_comment p_comment_id={self.p_comment_id} user_id={
-                    self.user_id} place_id={self.place_id} comment={self.comment
-                    } date={self.date} rating={self.rating}>"
+        return f"<Place_comment p_comment_id={self.p_comment_id} user_id={self.user_id} place_id={self.place_id} comment={self.comment} date={self.date} rating={self.rating}>"
 
 
 ##############################################################################
