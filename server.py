@@ -5,9 +5,11 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session
 #from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, db, User, Status, Neighborhood, Restaurant_reaction, Place, Place_comment
+from model import connect_to_db, db, User, Neighborhood, Restaurant_reaction, Place, Place_comment
 
 import requests
+import json
+from pprint import pprint
 
 YELP_URL = "https://api.yelp.com/v3/businesses/search"
 
@@ -97,174 +99,99 @@ def logout():
     return redirect("/")
 
 
-@app.route("/neighborhoods")
-def neighborhood_list():
-    """Show list of neighborhoods."""
+# @app.route("/neighborhoods")
+# def neighborhood_list():
+#     """Show list of neighborhoods."""
 
-    neighborhood = Neighborhood.query.all()
-
-
-    return render_template("neighborhoods.html", neighborhood=neighborhood)
+#     neighborhood = Neighborhood.query.all()
 
 
-@app.route("/neighborhoods/<int:neighborhood_id>", methods=['GET'])
-def neighborhood_page(neighborhood_id):
-    """Show info about a specific neighborhood."""
-
-    neighborhood = neighborhood.query.get(neighborhood_id)
-
-    return render_template("specific_neighborhoods.html", neighborhood=neighborhood)
+#     return render_template("neighborhoods.html", neighborhood=neighborhood)
 
 
-@app.route("/neighborhoods/<int:neighborhood_id>/restaurant", methods=['GET'])
+# @app.route("/neighborhoods/<int:neighborhood_id>", methods=['GET'])
+# def neighborhood_page(neighborhood_id):
+#     """Show info about a specific neighborhood."""
+
+#     neighborhood = neighborhood.query.get(neighborhood_id)
+
+#     return render_template("specific_neighborhoods.html", neighborhood=neighborhood)
+
+
+@app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['GET'])
 def restaurant_page(neighborhood_id):
     """Show list of the top 5 restaurants in specific neighborhood.
 
     If a user is logged in, let them add a reaction/comment."""
 
     neighborhood = Neighborhood.query.get(neighborhood_id)
+    neighborhood_name = neighborhood.name
+
+
+    data = yelp_api(neighborhood_name)
+
+    return render_template("restaurants.html", data=data, neighborhood_name=neighborhood_name)
 
 
 
-    response = requests.get(YELP_URL)
+# @app.route("/neighborhoods/<int:neighborhood_id>/places", methods=['GET'])
+# def places_page(places_id):
+#     """Show list of places in specific neighborhood."""
+
+#     neighborhood = neighborhood.query.get(neighborhood_id)
+#     place = place.query.get(places_id)
+
+#     return render_template("places.html")
+
+
+# @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['GET'])
+# def places_page(neighborhood_id):
+#     """Show list of places in specific neighborhood.
+
+#     if user is logged in, let them comment and rate."""
+
+#     neighborhood = neighborhood.query.get(neighborhood_id)
+
+#     return render_template("specific_places.html")
+
+@app.route("/testing_yelp_api")
+def yelp_api_page():
+
+    data = yelp_api("Hayes Valley")
+
+    return render_template("testing.html", data=data)
+
+
+def yelp_api(neighborhood_name):
+    """Requesting the 5 most popular restaurants in a neighborhood."""
+
+    # API constants
+    API_HOST = 'https://api.yelp.com'
+    SEARCH_PATH = '/v3/businesses/search'
+    BUSINESS_PATH = '/v3/businesses/'  # Business ID will come after slash.
+
+
+    DEFAULT_TERM = 'restaurants'
+    DEFAULT_LOCATION = neighborhood_name + ', San Francisco, CA'
+    SEARCH_LIMIT = 5
+    REVIEW_COUNT = 'review_count'
+
+    header = {"Authorization":"Bearer put_key_here"}
+
+    url_params = {
+        'term': DEFAULT_TERM.replace(' ', '+'), # replace with + b/c url can't have spaces
+        'location': DEFAULT_LOCATION.replace(' ', '+'),
+        'limit': SEARCH_LIMIT,
+        'sort_by': REVIEW_COUNT
+    }
+    response = requests.get("https://api.yelp.com/v3/businesses/search", headers=header, params=url_params)
     data = response.json()
 
+    return data
+    
+    
 
-@app.route("/neighborhoods/<int:neighborhood_id>/places", methods=['GET'])
-def places_page(places_id):
-    """Show list of places in specific neighborhood."""
-
-    neighborhood = neighborhood.query.get(neighborhood_id)
-    place = place.query.get(places_id)
-
-    return render_template("places.html")
-
-
-@app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['GET'])
-def places_page(neighborhood_id):
-    """Show list of places in specific neighborhood.
-
-    if user is logged in, let them comment and rate."""
-
-    neighborhood = neighborhood.query.get(neighborhood_id)
-
-    return render_template("specific_places.html")
-
-    user_id = session.get("user_id")
-
-    if user_id:
-        user_rating = Rating.query.filter_by(
-            movie_id=movie_id, user_id=user_id).first()
-
-    else:
-        user_rating = None
-
-    # Get average rating of movie
-
-    rating_scores = [r.score for r in movie.ratings]
-    avg_rating = float(sum(rating_scores)) / len(rating_scores)
-
-    prediction = None
-
-    # Prediction code: only predict if the user hasn't rated it.
-
-    if (not user_rating) and user_id:
-        user = User.query.get(user_id)
-        if user:
-            prediction = user.predict_rating(movie)
-
-    # Either use the prediction or their real rating
-
-    if prediction:
-        # User hasn't scored; use our prediction if we made one
-        effective_rating = prediction
-
-    elif user_rating:
-        # User has already scored for real; use that
-        effective_rating = user_rating.score
-
-    else:
-        # User hasn't scored, and we couldn't get a prediction
-        effective_rating = None
-
-    # Get the eye's rating, either by predicting or using real rating
-
-    the_eye = (User.query.filter_by(email="the-eye@of-judgment.com")
-                         .one())
-    eye_rating = Rating.query.filter_by(
-        user_id=the_eye.user_id, movie_id=movie.movie_id).first()
-
-    if eye_rating is None:
-        eye_rating = the_eye.predict_rating(movie)
-
-    else:
-        eye_rating = eye_rating.score
-
-    if eye_rating and effective_rating:
-        difference = abs(eye_rating - effective_rating)
-
-    else:
-        # We couldn't get an eye rating, so we'll skip difference
-        difference = None
-
-    # Depending on how different we are from the Eye, choose a
-    # message
-
-    BERATEMENT_MESSAGES = [
-        "I suppose you don't have such bad taste after all.",
-        "I regret every decision that I've ever made that has " +
-            "brought me to listen to your opinion.",
-        "Words fail me, as your taste in movies has clearly " +
-            "failed you.",
-        "That movie is great. For a clown to watch. Idiot.",
-        "Words cannot express the awfulness of your taste."
-    ]
-
-    if difference:
-        beratement = BERATEMENT_MESSAGES[int(difference)]
-
-    else:
-        beratement = None
-
-    return render_template(
-        "movie.html",
-        movie=movie,
-        user_rating=user_rating,
-        average=avg_rating,
-        prediction=prediction,
-        eye_rating=eye_rating,
-        difference=difference,
-        beratement=beratement
-        )
-
-
-@app.route("/movies/<int:movie_id>", methods=['POST'])
-def movie_detail_process(movie_id):
-    """Add/edit a rating."""
-
-    # Get form variables
-    score = int(request.form["score"])
-
-    user_id = session.get("user_id")
-    if not user_id:
-        raise Exception("No user logged in.")
-
-    # Check for an existing rating
-    rating = Rating.query.filter_by(user_id=user_id, movie_id=movie_id).first()
-
-    # Update an existing rating or if there isn't one yet, create one.
-    if rating:
-        rating.score = score
-        flash("Rating updated.")
-
-    else:
-        rating = Rating(user_id=user_id, movie_id=movie_id, score=score)
-        flash("Rating added.")
-        db.session.add(rating)
-
-    db.session.commit()
-
-    return redirect("/movies/{movie_id}")
+    
 
 
 if __name__ == "__main__":

@@ -22,29 +22,14 @@ class User(db.Model):
     lname = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(50), nullable=False)
-    status_code = db.Column(db.Integer, db.ForeignKey('status.status_code'))
-    #image = 
+    status = db.Column(db.String(10), nullable=False)
+    # image = 
 
-    status = db.relationship("Status", backref="users")
  
     def __repr__(self):
         """Provide helpful representation when printed."""
 
         return f"<User user_id={self.user_id} fname={self.fname} lname={self.lname} email={self.email} password={self.password} status_code={self.status_code}>"
-
-class Status(db.Model): # for referential integrity
-    """Resident or visitor status for user."""
-
-    __tablename__ = "statuses"
-
-    status_code = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    r_or_v = db.Column(db.String(10), nullable=False)
-   
-
-    def __repr__(self):
-        """Provide helpful representation when printed."""
-
-        return f"<Status status_code={self.status_code} r_or_v={self.r_or_v}>"
 
 
 class Neighborhood(db.Model): # for referential integrity
@@ -73,7 +58,7 @@ class Restaurant_reaction(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     comment = db.Column(db.String(200), nullable=False)
     date = db.Column(db.String(50), nullable=False)
-    neighborhood_id = db.Column(db.Integer, db.ForeignKey('Neighborhood.neighborhood_id'))
+    neighborhood_id = db.Column(db.Integer, db.ForeignKey('neighborhoods.neighborhood_id'))
 
     neighborhood = db.relationship("Neighborhood", backref="restaurant_reactions")
 
@@ -93,7 +78,8 @@ class Place(db.Model):  # for referential integrity
 
     place_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(100))
-    neighborhood_id = db.Column(db.Integer, db.ForeignKey('Neighborhood.neighborhood_id'))
+    neighborhood_id = db.Column(db.Integer, db.ForeignKey('neighborhoods.neighborhood_id'))
+    description = db.Column(db.String(500), nullable=False)
     #image = 
 
     neighborhood = db.relationship("Neighborhood", backref="places")
