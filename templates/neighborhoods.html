@@ -1,18 +1,15 @@
 {% extends 'base.html' %}
 
-{% block body %}
+{% block content %}
     <h2>Neighborhoods</h2>
 
-    <div id="neighborhood-list" class="row">
-      {% for n in neigborhood %}
+    <div id="neighborhood-list" >
+      {% for n in neighborhood %}
 
-          <div class="well">
+          <div>
             <h3>
-              <a href="/neighborhoods/{{ neigborhood.neighborhood_id }}">{{ neighborhood.name }}</a>
+              <a href="/neighborhoods/{{ n.neighborhood_id }}">{{ n.name }}</a>
             <h3>
-            <a href="/neighborhoods/{{ neigborhood.neighborhood_id }}">
-                <img src="{{ neighborhood.image }}" class="img-circle">
-            </a>
 
           </div>
 
@@ -20,3 +17,5 @@
     </div>
 
 {% endblock %}
+
+

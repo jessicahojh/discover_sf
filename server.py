@@ -11,7 +11,7 @@ import requests
 import json
 from pprint import pprint
 
-YELP_URL = "https://api.yelp.com/v3/businesses/search"
+import os
 
 
 app = Flask(__name__)
@@ -99,23 +99,25 @@ def logout():
     return redirect("/")
 
 
-# @app.route("/neighborhoods")
-# def neighborhood_list():
-#     """Show list of neighborhoods."""
+@app.route("/neighborhoods")
+def neighborhood_list():
+    """Show list of neighborhoods."""
 
-#     neighborhood = Neighborhood.query.all()
-
-
-#     return render_template("neighborhoods.html", neighborhood=neighborhood)
+    neighborhood = Neighborhood.query.all()
 
 
-# @app.route("/neighborhoods/<int:neighborhood_id>", methods=['GET'])
-# def neighborhood_page(neighborhood_id):
-#     """Show info about a specific neighborhood."""
+    return render_template("neighborhoods.html", neighborhood=neighborhood)
 
-#     neighborhood = neighborhood.query.get(neighborhood_id)
 
-#     return render_template("specific_neighborhoods.html", neighborhood=neighborhood)
+@app.route("/neighborhoods/<int:neighborhood_id>", methods=['GET'])
+def neighborhood_page(neighborhood_id):
+    """Show info about a specific neighborhood."""
+
+    neighborhood = Neighborhood.query.get(neighborhood_id)
+    neighborhood_name = neighborhood.name
+    description = neighborhood.description
+
+    return render_template("specific_neighborhoods.html", neighborhood=neighborhood, neighborhood_name=neighborhood_name, description=description)
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['GET'])
@@ -126,7 +128,7 @@ def restaurant_page(neighborhood_id):
 
     neighborhood = Neighborhood.query.get(neighborhood_id)
     neighborhood_name = neighborhood.name
-
+    
 
     data = yelp_api(neighborhood_name)
 
@@ -134,14 +136,17 @@ def restaurant_page(neighborhood_id):
 
 
 
-# @app.route("/neighborhoods/<int:neighborhood_id>/places", methods=['GET'])
-# def places_page(places_id):
-#     """Show list of places in specific neighborhood."""
+@app.route("/neighborhoods/<int:neighborhood_id>/places", methods=['GET'])
+def places_page(places_id):
+    """Show list of places in specific neighborhood."""
 
-#     neighborhood = neighborhood.query.get(neighborhood_id)
-#     place = place.query.get(places_id)
+    neighborhood = neighborhood.query.get(neighborhood_id) #gets specific neighborhood object with the id
+    neighborhood_name = neighborhood.name 
 
-#     return render_template("places.html")
+    place = place.query.filter(place.neighborhood_id==neighborhood_id) #gets specific place object with the id
+    place_name = place.name
+
+    return render_template("places.html", neighborhood_name=neighborhood_name, place_name=place_name)
 
 
 # @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['GET'])
@@ -153,13 +158,6 @@ def restaurant_page(neighborhood_id):
 #     neighborhood = neighborhood.query.get(neighborhood_id)
 
 #     return render_template("specific_places.html")
-
-@app.route("/testing_yelp_api")
-def yelp_api_page():
-
-    data = yelp_api("Hayes Valley")
-
-    return render_template("testing.html", data=data)
 
 
 def yelp_api(neighborhood_name):
@@ -176,7 +174,9 @@ def yelp_api(neighborhood_name):
     SEARCH_LIMIT = 5
     REVIEW_COUNT = 'review_count'
 
-    header = {"Authorization":"Bearer put_key_here"}
+    KEY = os.getenv('yelp_api_key')
+
+    header = {"Authorization":"Bearer " + KEY}
 
     url_params = {
         'term': DEFAULT_TERM.replace(' ', '+'), # replace with + b/c url can't have spaces
@@ -188,11 +188,15 @@ def yelp_api(neighborhood_name):
     data = response.json()
 
     return data
-    
-    
 
-    
+# @app.route("/testing_yelp_api")
+# def yelp_api_page():
 
+#     data = yelp_api("Hayes Valley")
+
+#     return render_template("testing.html", data=data)
+    
+    
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point

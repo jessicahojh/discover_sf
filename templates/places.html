@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Places to visit in {{neighborhood_name}}</h2>
+
+    <div>
+      {% for p in place %}
+
+          <div>
+            <h3>
+              <a href="/neighborhoods/{{ n.neighborhood_id }}">{{ n.name }}</a>
+            <h3>
+
+          </div>
+
+      {% endfor %}
+    </div>
+
+{% endblock %}

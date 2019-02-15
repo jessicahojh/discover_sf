@@ -1,34 +1,23 @@
 {% extends 'base.html' %}
 
-{% block body %}
+{% block content %}
 
-    <h2>{{ neighborhood.name }}</h2>
-
-    <div class="row">
-
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <img src="{{ neighborhood.image }}" class="img-responsive">
-        </div>
-
-        <div class="col-xs-8 col-sm-6 col-md-4 col-lg-3">
-            <div class="well">
-                <h3>Description</h3>
-                <p> {{ neighborhood.description }} </p>
-               
-            </div>
-        </div>
-    </div>
+    <h2>{{ neighborhood_name }}</h2>
 
     <div>
-    
-        <button type="button">Click Me!</button>
-
+        <p> {{ description }} </p>  
     </div>
 
-    <div>
-    
-        <button type="button">Click Me!</button>
+    <br>
 
+    <div>
+        <button type="button">Click Me!</button>
+    </div>
+
+    <br>
+
+    <div>
+        <button type="button">Click Me!</button>
     </div>
 
 

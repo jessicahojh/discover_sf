@@ -10,13 +10,13 @@ from server import app
 def load_users():
     """Load sample users into database."""
 
-    liz = User(fname="Liz", lname="Law", email="liz@gmail.com", password="123", status="resident")
-    ash = User(fname="Ash", lname="Ma", email="ash@gmail.com", password="abc", status="resident")
-    tk = User(fname="Tk", lname="Kombarov", email="tk@gmail.com", password="aaa", status="resident")
-    jess = User(fname="Jess", lname="Ho", email="jess@gmail.com", password="bbb", status="resident")
-    chad = User(fname="Chad", lname="Bradley", email="chad@gmail.com", password="ccc", status="visitor")
-    rachel = User(fname="Rachel", lname="Wang", email="rachel@gmail.com", password="haha", status="visitor")
-    jon = User(fname="Jon", lname="Whiteaker", email="jon@gmail.com", password="wow", status="resident")
+    liz = User(fname="Liz", lname="Law", email="liz@gmail.com", password="donut", status="resident")
+    ash = User(fname="Ash", lname="Ma", email="ash@gmail.com", password="lashes", status="resident")
+    tk = User(fname="Tk", lname="Kombarov", email="tk@gmail.com", password="kz", status="resident")
+    jess = User(fname="Jess", lname="Ho", email="jess@gmail.com", password="python", status="resident")
+    chad = User(fname="Chad", lname="Bradley", email="chad@gmail.com", password="ebitda", status="visitor")
+    rachel = User(fname="Rachel", lname="Wang", email="rachel@gmail.com", password="jellyfish", status="visitor")
+    jon = User(fname="Jon", lname="Whiteaker", email="jon@gmail.com", password="square", status="resident")
 
     db.session.add(liz)
     db.session.add(ash)
