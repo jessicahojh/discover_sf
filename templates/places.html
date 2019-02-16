@@ -4,11 +4,11 @@
     <h2>Places to visit in {{neighborhood_name}}</h2>
 
     <div>
-      {% for p in place %}
+      {% for p in places %}
 
           <div>
             <h3>
-              <a href="/neighborhoods/{{ p.neighborhood_id }}">{{ p.name }}</a>
+              <a href="/neighborhoods/{{ neighborhood_name }}/places/{{p.place_id}}">{{ p.name }}</a>
             <h3>
 
           </div>

@@ -137,24 +137,24 @@ def restaurant_page(neighborhood_id):
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places", methods=['GET'])
-def places_page(places_id):
+def places_page(neighborhood_id):
     """Show list of places in specific neighborhood."""
 
     neighborhood = Neighborhood.query.get(neighborhood_id) #gets specific neighborhood object with the id
     neighborhood_name = neighborhood.name 
     neighborhood_id = neighborhood.neighborhood_id
 
-    place = Place.query.filter(Place.neighborhood_id == neighborhood_id) #gets specific place object with the id
-    place_name = place.name
+    places = Place.query.filter(Place.neighborhood_id == neighborhood_id).all() #gets specific place object with the id
+    # places is a list 
 
-    return render_template("places.html", neighborhood_name=neighborhood_name, place_name=place_name)
+    return render_template("places.html", neighborhood_name=neighborhood_name, places=places)
 
 
 # @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['GET'])
 # def places_page(neighborhood_id):
-#     """Show list of places in specific neighborhood.
+#     """Show specific place to visit in specific neighborhood.
 
-#     if user is logged in, let them comment and rate."""
+#     If user is logged in, let them comment and rate."""
 
 #     neighborhood = neighborhood.query.get(neighborhood_id)
 
