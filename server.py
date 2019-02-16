@@ -11,7 +11,7 @@ import requests
 import json
 from pprint import pprint
 
-import os
+import os #so I can call line 179 
 
 
 app = Flask(__name__)
@@ -140,10 +140,11 @@ def restaurant_page(neighborhood_id):
 def places_page(places_id):
     """Show list of places in specific neighborhood."""
 
-    neighborhood = neighborhood.query.get(neighborhood_id) #gets specific neighborhood object with the id
+    neighborhood = Neighborhood.query.get(neighborhood_id) #gets specific neighborhood object with the id
     neighborhood_name = neighborhood.name 
+    neighborhood_id = neighborhood.neighborhood_id
 
-    place = place.query.filter(place.neighborhood_id==neighborhood_id) #gets specific place object with the id
+    place = Place.query.filter(Place.neighborhood_id == neighborhood_id) #gets specific place object with the id
     place_name = place.name
 
     return render_template("places.html", neighborhood_name=neighborhood_name, place_name=place_name)
