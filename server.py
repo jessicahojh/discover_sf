@@ -150,15 +150,21 @@ def places_page(neighborhood_id):
     return render_template("places.html", neighborhood_name=neighborhood_name, places=places)
 
 
-# @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['GET'])
-# def places_page(neighborhood_id):
-#     """Show specific place to visit in specific neighborhood.
+@app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['GET'])
+def specific_place_page(neighborhood_id, place_id):
+    """Show specific place to visit in specific neighborhood.
 
-#     If user is logged in, let them comment and rate."""
+    If user is logged in, let them comment and rate."""
 
-#     neighborhood = neighborhood.query.get(neighborhood_id)
+    neighborhood = Neighborhood.query.get(neighborhood_id)
+    neighborhood_name = neighborhood.name 
+    neighborhood_id = neighborhood.neighborhood_id
 
-#     return render_template("specific_places.html")
+    place = Place.query.filter(Place.place_id == place_id).one()
+    place_name = place.name
+    description = place.description
+
+    return render_template("specific_places.html", place_name=place_name, description=description)
 
 
 def yelp_api(neighborhood_name):
