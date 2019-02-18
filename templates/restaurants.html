@@ -22,21 +22,21 @@
     </div>
     <br>
 
-  <form action="comment" method="POST">
-
-    <div>
-    <label>
-      Comment:
-      <input type="fname" name="fname">
-    </label>
-  </div>
+  <div class="container-fluid">
+<h5>What do you think?:</h5>
+    <form action="/neighborhoods/{{neighborhood_id}}/restaurants" id="reaction-form" enctype=multipart/form-data method="POST">
+        <br>
 
 
-  <div>
-    <input type="submit" value="Comment">
-  </div>
-
-</form>
+                            <label>Review:</label>
+                            <textarea class="form-control" rows="4" cols="50" name="food-comment" id="food-comment" required></textarea>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+            
+        <button type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
 
 
   

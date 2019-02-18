@@ -127,12 +127,13 @@ def restaurant_page(neighborhood_id):
 
     neighborhood = Neighborhood.query.get(neighborhood_id)
     neighborhood_name = neighborhood.name
+    neighborhood_id = neighborhood.neighborhood_id
     
 
     data = yelp_api(neighborhood_name)
       
 
-    return render_template("restaurants.html", data=data, neighborhood_name=neighborhood_name)
+    return render_template("restaurants.html", data=data, neighborhood_name=neighborhood_name, neighborhood_id=neighborhood_id)
 
 
 # @app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['POST'])
