@@ -87,7 +87,7 @@ def login_process():
     session["user_id"] = user.user_id
 
     flash("Logged in")
-    return redirect(f"/users/{user.user_id}")
+    return redirect(f"/")
 
 
 @app.route('/logout')
@@ -136,15 +136,19 @@ def restaurant_page(neighborhood_id):
     return render_template("restaurants.html", data=data, neighborhood_name=neighborhood_name, neighborhood_id=neighborhood_id)
 
 
-# @app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['POST'])
-# def restaurant_page_reaction():
-#     """If a user is logged in, let them add a reaction/comment about restaurants."""
+@app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['POST'])
+def restaurant_page_reaction():
+    """If a user is logged in, let them add a reaction/comment about restaurants."""
 
-    
+    user = session.get("user_id")
 
-#     flash("Reaction Added.")
+    if not user:
+        flash("Please log in to add a review")
+        return redirect('/login-form')
 
-#     return redirect("/neighborhoods/<int:neighborhood_id>/restaurants")
+    # flash("Reaction Added.")
+
+    return redirect("/neighborhoods/<int:neighborhood_id>/restaurants")
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places", methods=['GET'])
@@ -179,13 +183,14 @@ def specific_place_page(neighborhood_id, place_id):
     return render_template("specific_places.html", place_name=place_name, description=description, neighborhood_id=neighborhood_id, place_id=place_id)
 
 
-# @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['POST'])
-# def specific_place_comment():
-#     """If user is logged in, let them comment and rate about place."""
+@app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['POST'])
+def specific_place_comment():
+    """If user is logged in, let them comment and rate place."""
+
+    user = session.get("user_id")
 
 
-
-#     return redirect("/neighborhoods/<int:neighborhood_id>/places/<int:place_id")
+    return redirect("/neighborhoods/<int:neighborhood_id>/places/<int:place_id")
 
 
 def yelp_api(neighborhood_name):

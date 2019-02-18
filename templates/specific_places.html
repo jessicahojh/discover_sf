@@ -14,6 +14,8 @@
 
     <br>
 
+{% if "user_id" in session %}
+
     <div class="container-fluid">
 <h5>Comment and rate for {{ place_name }}:</h5>
     <form action="/neighborhoods/{{neighborhood_id}}/places/{{place_id}}" id="review-form" enctype=multipart/form-data method="POST">
@@ -41,8 +43,11 @@
                     <br>
                 </div>
             </div>
-            
+
         <button type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
+
+    {% endif %}
+
 
 
 {% endblock %}

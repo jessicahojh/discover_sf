@@ -22,6 +22,8 @@
     </div>
     <br>
 
+    {% if "user_id" in session %}
+
   <div class="container-fluid">
 <h5>What do you think?:</h5>
     <form action="/neighborhoods/{{neighborhood_id}}/restaurants" id="reaction-form" enctype=multipart/form-data method="POST">
@@ -38,6 +40,6 @@
             
         <button type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
 
-
+{% endif %}
   
 {% endblock %}
