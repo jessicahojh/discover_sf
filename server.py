@@ -11,7 +11,7 @@ import requests
 import json
 from pprint import pprint
 
-import os #so I can call line 179 
+import os 
 
 
 app = Flask(__name__)
@@ -116,24 +116,34 @@ def neighborhood_page(neighborhood_id):
     neighborhood = Neighborhood.query.get(neighborhood_id)
     neighborhood_name = neighborhood.name
     description = neighborhood.description
+    neighborhood_id = neighborhood.neighborhood_id
 
-    return render_template("specific_neighborhoods.html", neighborhood=neighborhood, neighborhood_name=neighborhood_name, description=description)
+    return render_template("specific_neighborhoods.html", neighborhood=neighborhood, neighborhood_name=neighborhood_name, description=description, neighborhood_id=neighborhood_id)
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['GET'])
 def restaurant_page(neighborhood_id):
-    """Show list of the top 5 restaurants in specific neighborhood.
-
-    If a user is logged in, let them add a reaction/comment."""
+    """Show list of the top 5 restaurants in specific neighborhood."""
 
     neighborhood = Neighborhood.query.get(neighborhood_id)
     neighborhood_name = neighborhood.name
     
 
     data = yelp_api(neighborhood_name)
+      
 
     return render_template("restaurants.html", data=data, neighborhood_name=neighborhood_name)
 
+
+# @app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['POST'])
+# def restaurant_page_reaction():
+#     """If a user is logged in, let them add a reaction/comment about restaurants."""
+
+    
+
+#     flash("Reaction Added.")
+
+#     return redirect("/neighborhoods/<int:neighborhood_id>/restaurants")
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places", methods=['GET'])
@@ -146,15 +156,14 @@ def places_page(neighborhood_id):
 
     places = Place.query.filter(Place.neighborhood_id == neighborhood_id).all() #gets specific place object with the id
     # places is a list 
+    place_id = Place.place_id
 
-    return render_template("places.html", neighborhood_name=neighborhood_name, places=places)
+    return render_template("places.html", neighborhood_name=neighborhood_name, neighborhood_id=neighborhood_id, places=places, place_id=place_id)
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['GET'])
 def specific_place_page(neighborhood_id, place_id):
-    """Show specific place to visit in specific neighborhood.
-
-    If user is logged in, let them comment and rate."""
+    """Show specific place to visit in specific neighborhood."""
 
     neighborhood = Neighborhood.query.get(neighborhood_id)
     neighborhood_name = neighborhood.name 
@@ -163,8 +172,18 @@ def specific_place_page(neighborhood_id, place_id):
     place = Place.query.filter(Place.place_id == place_id).one()
     place_name = place.name
     description = place.description
+    
 
     return render_template("specific_places.html", place_name=place_name, description=description)
+
+
+# @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['POST'])
+# def specific_place_comment():
+#     """If user is logged in, let them comment and rate about place."""
+
+
+
+#     return redirect("/neighborhoods/<int:neighborhood_id>/places/<int:place_id")
 
 
 def yelp_api(neighborhood_name):

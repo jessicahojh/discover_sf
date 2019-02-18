@@ -17,12 +17,27 @@
       <div>Reviews: {{business['review_count']}}</div>
       <div>Price: {{business['price']}}</div>
 
-
-
-
       {%endfor%}
 
     </div>
+    <br>
+
+  <form action="comment" method="POST">
+
+    <div>
+    <label>
+      Comment:
+      <input type="fname" name="fname">
+    </label>
+  </div>
+
+
+  <div>
+    <input type="submit" value="Comment">
+  </div>
+
+</form>
+
 
   
 {% endblock %}
