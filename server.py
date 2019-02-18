@@ -172,9 +172,10 @@ def specific_place_page(neighborhood_id, place_id):
     place = Place.query.filter(Place.place_id == place_id).one()
     place_name = place.name
     description = place.description
+    place_id = place.place_id
     
 
-    return render_template("specific_places.html", place_name=place_name, description=description)
+    return render_template("specific_places.html", place_name=place_name, description=description, neighborhood_id=neighborhood_id, place_id=place_id)
 
 
 # @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['POST'])

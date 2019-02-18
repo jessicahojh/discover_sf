@@ -1,6 +1,7 @@
 """Models and database functions for Ratings project."""
 
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 # This is the connection to the PostgreSQL database; we're getting this through
 # the Flask-SQLAlchemy helper library. On this, we can find the `session`
@@ -56,8 +57,8 @@ class Restaurant_reaction(db.Model):
 
     reaction_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    comment = db.Column(db.String(200), nullable=False)
-    date = db.Column(db.String(50), nullable=False)
+    comment = db.Column(db.Text, nullable=False)
+    created_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     neighborhood_id = db.Column(db.Integer, db.ForeignKey('neighborhoods.neighborhood_id'))
 
     neighborhood = db.relationship("Neighborhood", backref="restaurant_reactions")
@@ -97,8 +98,8 @@ class Place_comment(db.Model):
     p_comment_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     place_id = db.Column(db.Integer, db.ForeignKey('places.place_id'))
-    comment = db.Column(db.String(200), nullable=False)
-    date = db.Column(db.String(50), nullable=False)
+    comment = db.Column(db.Text, nullable=False)
+    created_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     rating = db.Column(db.Integer, nullable=False)
 
     # Define relationship to user

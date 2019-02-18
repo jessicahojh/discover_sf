@@ -2,9 +2,47 @@
 
 {% block content %}
     <h2>{{ place_name }}</h2>
+    
+    <div>
+    Add picture here
+    </div>
 
+    <br>
     <div>
         <p> {{ description }} </p>  
     </div>
+
+    <br>
+
+    <div class="container-fluid">
+<h5>Comment and rate for {{ place_name }}:</h5>
+    <form action="/neighborhoods/{{neighborhood_id}}/places/{{place_id}}" id="review-form" enctype=multipart/form-data method="POST">
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col">
+                            <label>Rating:</label>
+
+                            <select class="form-control" name="rating-score" id="rating-score"required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+
+                            <label>Review:</label>
+                            <textarea class="form-control" rows="4" cols="50" name="food-comment" id="food-comment" required></textarea>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+            
+        <button type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
+
 
 {% endblock %}
