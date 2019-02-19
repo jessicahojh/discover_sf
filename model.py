@@ -1,7 +1,9 @@
 """Models and database functions for Ratings project."""
 
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy 
 from datetime import datetime
+from sqlalchemy.sql import func
+
 
 # This is the connection to the PostgreSQL database; we're getting this through
 # the Flask-SQLAlchemy helper library. On this, we can find the `session`
@@ -24,7 +26,7 @@ class User(db.Model):
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(50), nullable=False)
     status = db.Column(db.String(10), nullable=False)
-    # image = 
+    #image_url = db.Column(db.String(128), nullable=False)
 
  
     def __repr__(self):
@@ -41,7 +43,7 @@ class Neighborhood(db.Model): # for referential integrity
     neighborhood_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(500), nullable=False)
-    #image = 
+    image_url = db.Column(db.String(128), nullable=False)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -58,7 +60,7 @@ class Restaurant_reaction(db.Model):
     reaction_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     comment = db.Column(db.Text, nullable=False)
-    created_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    created_date = db.Column(db.TIMESTAMP(timezone=True), server_default=func.now(), onupdate=func.now())
     neighborhood_id = db.Column(db.Integer, db.ForeignKey('neighborhoods.neighborhood_id'))
 
     neighborhood = db.relationship("Neighborhood", backref="restaurant_reactions")
@@ -81,7 +83,7 @@ class Place(db.Model):  # for referential integrity
     name = db.Column(db.String(100))
     neighborhood_id = db.Column(db.Integer, db.ForeignKey('neighborhoods.neighborhood_id'))
     description = db.Column(db.String(500), nullable=False)
-    #image = 
+    image_url = db.Column(db.String(128), nullable=False) 
 
     neighborhood = db.relationship("Neighborhood", backref="places")
 
@@ -99,7 +101,7 @@ class Place_comment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     place_id = db.Column(db.Integer, db.ForeignKey('places.place_id'))
     comment = db.Column(db.Text, nullable=False)
-    created_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    created_date = db.Column(db.TIMESTAMP(timezone=True), server_default=func.now(), onupdate=func.now())
     rating = db.Column(db.Integer, nullable=False)
 
     # Define relationship to user

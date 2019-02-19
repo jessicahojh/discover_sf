@@ -8,6 +8,7 @@
     </div>
 
     <br>
+
     <div>
         <p> {{ description }} </p>  
     </div>
@@ -16,10 +17,12 @@
 
 {% if "user_id" in session %}
 
-    <div class="container-fluid">
+    
+<div class="container-fluid">
 <h5>Comment and rate for {{ place_name }}:</h5>
+
     <form action="/neighborhoods/{{neighborhood_id}}/places/{{place_id}}" id="review-form" enctype=multipart/form-data method="POST">
-        <br>
+    <br>
         <div class="container">
             <div class="row">
                 <div class="col-9">
@@ -46,8 +49,19 @@
 
         <button type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
 
-    {% endif %}
+{% endif %}
 
+{% for comment in data[comments] %}
+{% if comment[place_id] == {{place_id}} %}
+
+      <div>{{comment['fname']}} {{comment['lname']}}</div>
+      <div>Date: {{comment['created_date']}}</div>
+      <div>Rating: {{comment['rating']}}</div>
+      <div>Comment: {{comment['comment']}}</div>
+      
+
+{% endif %}
+{% endfor %}
 
 
 {% endblock %}

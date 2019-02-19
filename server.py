@@ -13,6 +13,8 @@ from pprint import pprint
 
 import os 
 
+from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
+
 
 app = Flask(__name__)
 
@@ -118,7 +120,9 @@ def neighborhood_page(neighborhood_id):
     description = neighborhood.description
     neighborhood_id = neighborhood.neighborhood_id
 
-    return render_template("specific_neighborhoods.html", neighborhood=neighborhood, neighborhood_name=neighborhood_name, description=description, neighborhood_id=neighborhood_id)
+    return render_template("specific_neighborhoods.html", neighborhood=neighborhood,
+     neighborhood_name=neighborhood_name, description=description, 
+     neighborhood_id=neighborhood_id)
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['GET'])
@@ -133,12 +137,14 @@ def restaurant_page(neighborhood_id):
     data = yelp_api(neighborhood_name)
       
 
-    return render_template("restaurants.html", data=data, neighborhood_name=neighborhood_name, neighborhood_id=neighborhood_id)
+    return render_template("restaurants.html", data=data,
+     neighborhood_name=neighborhood_name, neighborhood_id=neighborhood_id)
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['POST'])
 def restaurant_page_reaction():
-    """If a user is logged in, let them add a reaction/comment about restaurants."""
+    """If a user is logged in, let them add a reaction/comment about restaurants.
+    User only see the option to comment if they are logged in"""
 
     user = session.get("user_id")
 
@@ -146,7 +152,6 @@ def restaurant_page_reaction():
         flash("Please log in to add a review")
         return redirect('/login-form')
 
-    # flash("Reaction Added.")
 
     return redirect("/neighborhoods/<int:neighborhood_id>/restaurants")
 
@@ -163,7 +168,8 @@ def places_page(neighborhood_id):
     # places is a list 
     place_id = Place.place_id
 
-    return render_template("places.html", neighborhood_name=neighborhood_name, neighborhood_id=neighborhood_id, places=places, place_id=place_id)
+    return render_template("places.html", neighborhood_name=neighborhood_name, 
+        neighborhood_id=neighborhood_id, places=places, place_id=place_id)
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['GET'])
@@ -180,12 +186,14 @@ def specific_place_page(neighborhood_id, place_id):
     place_id = place.place_id
     
 
-    return render_template("specific_places.html", place_name=place_name, description=description, neighborhood_id=neighborhood_id, place_id=place_id)
+    return render_template("specific_places.html", place_name=place_name, 
+        description=description, neighborhood_id=neighborhood_id, place_id=place_id)
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['POST'])
 def specific_place_comment():
-    """If user is logged in, let them comment and rate place."""
+    """If user is logged in, let them comment and rate place. User only see the 
+    option to comment if they are logged in"""
 
     user = session.get("user_id")
 

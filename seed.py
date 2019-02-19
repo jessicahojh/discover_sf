@@ -36,11 +36,12 @@ def load_neighborhoods(neighborhood_filename):
         row = row.rstrip()
 
         # unpack the row
-        neighborhood_id, name, description = row.split("|")
+        neighborhood_id, name, description, img_path = row.split("|")
 
         neighborhood = Neighborhood(neighborhood_id=neighborhood_id,
                                     name=name,
-                                    description=description)
+                                    description=description,
+                                    url=img_path)
 
 
         db.session.add(neighborhood)
@@ -54,15 +55,60 @@ def load_places_to_visit(places_filename):
         row = row.rstrip()
 
         # unpack the row
-        place_id, name, neighborhood_id, description = row.split("|")
+        place_id, name, neighborhood_id, description, img_path = row.split("|")
 
         place = Place(place_id=place_id,
                         name=name,
                         neighborhood_id=neighborhood_id,
-                        description=description)
+                        description=description,
+                        url=img_path)
 
 
         db.session.add(place)
+
+    db.session.commit()
+
+
+def load_restaurant_reactions(rest_reaction_filename):
+    """Load reactions from u.rest_comments into database."""
+
+    for i, row in enumerate(open(rest_reaction_filename)):
+        row = row.rstrip()
+
+        # unpack the row
+        reaction_id, user_id, comment, created_date, neighborhood_id = row.split("|")
+  
+        create_date = created_date.strftime("%A-%B-%d-%Y")
+    
+
+        r_comment = Restaurant_reaction(reaction_id=reaction_id, user_id=user_id,
+            comment=comment, created_date=create_date, neighborhood_id=neighborhood_id)
+
+        
+
+        db.session.add(r_comment)
+
+    db.session.commit()
+
+
+def load_place_comments(place_comments_filename):
+    """Load places from u.place_comments into database."""
+
+    for i, row in enumerate(open(place_comments_filename)):
+        row = row.rstrip()
+
+        # unpack the row
+        p_comment_id, user_id, place_id, comment, created_date, rating = row.split("|")
+
+        create_date = created_date.strftime("%A-%B-%d-%Y")
+
+        p_comment = Place_comment(p_comment_id=p_comment_id, user_id=user_id, place_id=place_id,
+            comment=comment, created_date=create_date, rating=rating)
+
+        
+
+
+        db.session.add(p_comment)
 
     db.session.commit()
 
@@ -75,8 +121,13 @@ if __name__ == "__main__":
 
     neighborhood_filename = "seed_data/u.neighborhood"
     places_filename = "seed_data/u.place"
+    rest_reaction_filename = "seed_data/u.rest_comments"
+    place_comments_filename = "seed_data/u.place_comments"
 
     load_neighborhoods(neighborhood_filename)
     load_places_to_visit(places_filename)
+    load_restaurant_reactions(rest_reaction_filename)
+    load_place_comments(place_comments_filename)
+
     load_users()
 
