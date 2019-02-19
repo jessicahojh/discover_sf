@@ -26,7 +26,7 @@ class User(db.Model):
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(50), nullable=False)
     status = db.Column(db.String(10), nullable=False)
-    #image_url = db.Column(db.String(128), nullable=False)
+    image_url = db.Column(db.String(200), nullable=False)
 
  
     def __repr__(self):
@@ -43,7 +43,7 @@ class Neighborhood(db.Model): # for referential integrity
     neighborhood_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(500), nullable=False)
-    image_url = db.Column(db.String(128), nullable=False)
+    image_url = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -83,7 +83,7 @@ class Place(db.Model):  # for referential integrity
     name = db.Column(db.String(100))
     neighborhood_id = db.Column(db.Integer, db.ForeignKey('neighborhoods.neighborhood_id'))
     description = db.Column(db.String(500), nullable=False)
-    image_url = db.Column(db.String(128), nullable=False) 
+    image_url = db.Column(db.String(200), nullable=False) 
 
     neighborhood = db.relationship("Neighborhood", backref="places")
 
