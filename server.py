@@ -186,10 +186,20 @@ def specific_place_page(neighborhood_id, place_id):
     place_name = place.name
     description = place.description
     place_id = place.place_id
+
+    comments = Place_comment.query.filter(Place_comment.place_id == place_id).all()
+
+
+    sum_comments = sum(comment.rating for comment in comments) #list comprehension
+    num_comments = len(comments)
+    avg_rating = float(sum_comments)/num_comments
+
+
     
 
     return render_template("specific_places.html", place_name=place_name, 
-        description=description, neighborhood_id=neighborhood_id, place_id=place_id)
+        description=description, neighborhood_id=neighborhood_id, place_id=place_id,
+        comments=comments, avg_rating=avg_rating, num_comments=num_comments)
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['POST'])
@@ -198,6 +208,8 @@ def specific_place_comment():
     option to comment if they are logged in"""
 
     user = session.get("user_id")
+
+    
 
 
     return redirect("/neighborhoods/<int:neighborhood_id>/places/<int:place_id")

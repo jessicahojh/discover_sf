@@ -2,6 +2,13 @@
 
 {% block content %}
     <h2>{{ place_name }}</h2>
+
+    
+
+      <div>Overall Rating: {{avg_rating}}</div>
+      <div>Number of Reviews: {{num_comments}}</div>
+
+      <br>
     
     <div>
     Add picture here
@@ -51,16 +58,16 @@
 
 {% endif %}
 
-{% for comment in data[comments] %}
-{% if comment[place_id] == {{place_id}} %}
+{% for comment in comments %}
 
-      <div>{{comment['fname']}} {{comment['lname']}}</div>
-      <div>Date: {{comment['created_date']}}</div>
+      <div>{{comment.user['fname']}} {{comment.user['lname']}} ({{comment.user['status']}})</div>
+      <div>Date: {{comment['created_date'].strftime("%B %d, %Y")}}</div>
       <div>Rating: {{comment['rating']}}</div>
       <div>Comment: {{comment['comment']}}</div>
+      <br>
+      <br>
       
 
-{% endif %}
 {% endfor %}
 
 
