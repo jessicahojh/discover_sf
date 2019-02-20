@@ -39,7 +39,20 @@
             </div>
             
         <button type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
+        
 
 {% endif %}
+<br>
+
+{% for comment in comments %}
+
+      <div>{{comment.user['fname']}} {{comment.user['lname']}} ({{comment.user['status']}})</div>
+      <div>Date: {{comment['created_date'].strftime("%B %d, %Y")}}</div>
+      <div>Comment: {{comment['comment']}}</div>
+      <br>
+      <br>
+
+{% endfor %}
+
   
 {% endblock %}

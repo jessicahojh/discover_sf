@@ -137,25 +137,27 @@ def restaurant_page(neighborhood_id):
     
 
     data = yelp_api(neighborhood_name)
+
+    comments = Restaurant_reaction.query.filter(Restaurant_reaction.neighborhood_id == neighborhood_id).all()
       
 
     return render_template("restaurants.html", data=data,
-     neighborhood_name=neighborhood_name, neighborhood_id=neighborhood_id)
+     neighborhood_name=neighborhood_name, neighborhood_id=neighborhood_id, comments=comments)
 
 
-@app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['POST'])
-def restaurant_page_reaction():
-    """If a user is logged in, let them add a reaction/comment about restaurants.
-    User only see the option to comment if they are logged in"""
+# @app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['POST'])
+# def restaurant_page_reaction():
+#     """If a user is logged in, let them add a reaction/comment about restaurants.
+#     User only see the option to comment if they are logged in"""
 
-    user = session.get("user_id")
+#     user = session.get("user_id")
 
-    if not user:
-        flash("Please log in to add a review")
-        return redirect('/login-form')
+#     if not user:
+#         flash("Please log in to add a review")
+#         return redirect('/login-form')
 
 
-    return redirect("/neighborhoods/<int:neighborhood_id>/restaurants")
+#     return redirect("/neighborhoods/<int:neighborhood_id>/restaurants")
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places", methods=['GET'])
@@ -202,17 +204,17 @@ def specific_place_page(neighborhood_id, place_id):
         comments=comments, avg_rating=avg_rating, num_comments=num_comments)
 
 
-@app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['POST'])
-def specific_place_comment():
-    """If user is logged in, let them comment and rate place. User only see the 
-    option to comment if they are logged in"""
+# @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['POST'])
+# def specific_place_comment():
+#     """If user is logged in, let them comment and rate place. User only see the 
+#     option to comment if they are logged in"""
 
-    user = session.get("user_id")
-
-    
+#     user = session.get("user_id")
 
 
-    return redirect("/neighborhoods/<int:neighborhood_id>/places/<int:place_id")
+
+
+#     return redirect("/neighborhoods/<int:neighborhood_id>/places/<int:place_id")
 
 
 def yelp_api(neighborhood_name):
