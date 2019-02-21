@@ -210,13 +210,13 @@ def bear_info():
 
     places = {
         place.marker_id: {
-            "bearId": bear.bear_id,
-            "gender": bear.gender,
-            "birthYear": bear.birth_year,
-            "capYear": bear.cap_year,
-            "capLat": bear.cap_lat,
-            "capLong": bear.cap_long,
-            "collared": bear.collared.lower()
+            "place_id": place.place_id,
+            "name": place.name,
+            "neighborhood_id": place.neighborhood_id,
+            "description": place.description,
+            "p_lat": place.p_lat,
+            "p_long": place.p_long,
+            "img_url": img_url
         }
         for place in Place.query.limit(50)}
 

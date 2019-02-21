@@ -55,12 +55,14 @@ def load_places_to_visit(places_filename):
         row = row.rstrip()
 
         # unpack the row
-        place_id, name, neighborhood_id, description, img_path = row.split("|")
+        place_id, name, neighborhood_id, description, p_lat, p_long, img_path = row.split("|")
 
         place = Place(place_id=place_id,
                         name=name,
                         neighborhood_id=neighborhood_id,
                         description=description,
+                        p_lat=p_lat,
+                        p_long=p_long,
                         image_url=img_path)
 
 
