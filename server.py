@@ -2,7 +2,7 @@
 
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, jsonify
 #from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Neighborhood, Restaurant_reaction, Place, Place_comment
@@ -209,14 +209,14 @@ def bear_info():
     """JSON information about place location."""
 
     places = {
-        place.marker_id: {
+        place.place_id: {
             "place_id": place.place_id,
             "name": place.name,
             "neighborhood_id": place.neighborhood_id,
             "description": place.description,
             "p_lat": place.p_lat,
             "p_long": place.p_long,
-            "img_url": img_url
+            "image_url": place.image_url
         }
         for place in Place.query.limit(50)}
 
