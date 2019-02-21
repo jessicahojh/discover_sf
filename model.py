@@ -83,6 +83,8 @@ class Place(db.Model):  # for referential integrity
     name = db.Column(db.String(100))
     neighborhood_id = db.Column(db.Integer, db.ForeignKey('neighborhoods.neighborhood_id'))
     description = db.Column(db.String(500), nullable=False)
+    p_lat = db.Column(db.String(15), nullable=True)
+    p_long = db.Column(db.String(15), nullable=True)
     image_url = db.Column(db.String(200), nullable=False) 
 
     neighborhood = db.relationship("Neighborhood", backref="places")

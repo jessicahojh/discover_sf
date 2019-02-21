@@ -1,30 +1,30 @@
-1|Stern Grove|1|..description..|static/specific_places_images/stern_grove.jpg
-2|Lands End|2|..description..|static/specific_places_images/lands_end.jpg
-3|Patricia's Green|3|..description..|static/specific_places_images/patricias_green.jpg
-4|Fort Mason|4|..description..|static/specific_places_images/fort_mason.jpg
-5|Dragon's Gate|5|..description..|static/specific_places_images/dragons_gate.jpg
-6|Painted Ladies|6|..description..|static/specific_places_images/painted_ladies.jpg
-7|Union Square|7|..description..|static/specific_places_images/union_square.jpg
-8|Yerba Buena Gardens|8|..description..|static/specific_places_images/yerba_buena_gardens.jpg
-9|Dolores Park|9|..description..|static/specific_places_images/dolores_park.jpg
-10|Grace Cathedral|10|..description..|static/specific_places_images/grace_cathedral.jpg
-11|Lafayette Park|11|..description..|static/specific_places_images/lafatette_park.jpg
-12|Crissy Field|12|..description..|static/specific_places_images/crissy_field.jpg
-13|Washington Square|13|..description..|static/specific_places_images/washington_square.jpg
-14|Rainbow Honor Walk|14|..description..|static/specific_places_images/rainbow_honor_walk.jpg
-15|Buena Vista Park|15|..description..|static/specific_places_images/buena_vista_park.jpg
-16|Moraga Steps|1|..description..|static/specific_places_images/moraga_steps.jpg
-17|Legion of Honor|2|..description..|static/specific_places_images/legion_of_honor.jpg
-18|SF Jazz|3|..description..|static/specific_places_images/sf_jazz.jpg
-19|The Wave Organ|4|..description..|static/specific_places_images/the_wave_organ.jpg
-20|Cable Car Museum|5|..description..|static/specific_places_images/cable_car_museum.jpg
-21|The Panhandle|6|..description..|static/specific_places_images/the_panhandle.jpg
-22|SF MOMA|7|..description..|static/specific_places_images/sf_moma.jpg
-23|AT&T Park|8|..description..|static/specific_places_images/att_park.jpg
-24|Balmy Alley|9|..description..|static/specific_places_images/balmy_alley.jpg
-25|Huntington Park|10|..description..|static/specific_places_images/huntington_park.jpg
-26|Alta Plaza Park|11|..description..|static/specific_places_images/alta_plaza_park.jpg
-27|Palace of Fine Arts|12|..description..|static/specific_places_images/palace_of_fine_arts.jpg
-28|Coit Tower|13|..description..|static/specific_places_images/coit_tower.jpg
-29|The Castro Theatre|14|..description..|static/specific_places_images/the_castro_theatre.jpg
-30|Haight Street|15|..description..|static/specific_places_images/haight_street.jpg
+1|Stern Grove|1|..description..|37.7349|122.4756|static/specific_places_images/stern_grove.jpg
+2|Lands End|2|..description..|37.7849|122.5075|static/specific_places_images/lands_end.jpg
+3|Patricia's Green|3|..description..|37.7762|122.4244|static/specific_places_images/patricias_green.jpg
+4|Fort Mason|4|..description..|37.8068|122.4318|static/specific_places_images/fort_mason.jpg
+5|Dragon's Gate|5|..description..|37.7907|122.4056|static/specific_places_images/dragons_gate.jpg
+6|Painted Ladies|6|..description..|37.7763|122.4328|static/specific_places_images/painted_ladies.jpg
+7|Union Square|7|..description..|37.7880|122.4075|static/specific_places_images/union_square.jpg
+8|Yerba Buena Gardens|8|..description..|37.7850|122.4023|static/specific_places_images/yerba_buena_gardens.jpg
+9|Dolores Park|9|..description..|37.7596|122.4269|static/specific_places_images/dolores_park.jpg
+10|Grace Cathedral|10|..description..|37.7919|122.4130|static/specific_places_images/grace_cathedral.jpg
+11|Lafayette Park|11|..description..|37.7916|122.4276|static/specific_places_images/lafatette_park.jpg
+12|Crissy Field|12|..description..|37.8040|122.4650|static/specific_places_images/crissy_field.jpg
+13|Washington Square|13|..description..|37.8008|122.4100|static/specific_places_images/washington_square.jpg
+14|Rainbow Honor Walk|14|..description..|37.7610|122.4349|static/specific_places_images/rainbow_honor_walk.jpg
+15|Buena Vista Park|15|..description..|37.7684|122.4414|static/specific_places_images/buena_vista_park.jpg
+16|Moraga Stairs|1|..description..|37.|122.|static/specific_places_images/moraga_steps.jpg
+17|Legion of Honor|2|..description..|37.7845|122.5008|static/specific_places_images/legion_of_honor.jpg
+18|SF Jazz|3|..description..|37.7764|122.4215|static/specific_places_images/sf_jazz.jpg
+19|The Wave Organ|4|..description..|37.8085|122.4402|static/specific_places_images/the_wave_organ.jpg
+20|Cable Car Museum|5|..description..|37.7946|122.4115|static/specific_places_images/cable_car_museum.jpg
+21|The Panhandle|6|..description..|37.7724|122.4463|static/specific_places_images/the_panhandle.jpg
+22|SF MOMA|7|..description..|37.7749|122.4194|static/specific_places_images/sf_moma.jpg
+23|AT&T Park|8|..description..|37.7786|122.3893|static/specific_places_images/att_park.jpg
+24|Balmy Alley|9|..description..|37.7518|122.4124|static/specific_places_images/balmy_alley.jpg
+25|Huntington Park|10|..description..|37.7922|122.4122|static/specific_places_images/huntington_park.jpg
+26|Alta Plaza Park|11|..description..|37.7911|122.4376|static/specific_places_images/alta_plaza_park.jpg
+27|Palace of Fine Arts|12|..description..|37.8028|122.4493|static/specific_places_images/palace_of_fine_arts.jpg
+28|Coit Tower|13|..description..|37.8024|122.4058|static/specific_places_images/coit_tower.jpg
+29|The Castro Theatre|14|..description..|37.7620|122.4348|static/specific_places_images/the_castro_theatre.jpg
+30|Haight Street|15|..description..|37.7692|122.4481|static/specific_places_images/haight_street.jpg

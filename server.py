@@ -204,6 +204,25 @@ def specific_place_page(neighborhood_id, place_id):
         comments=comments, avg_rating=avg_rating, num_comments=num_comments)
 
 
+@app.route('/places-location.json')
+def bear_info():
+    """JSON information about place location."""
+
+    places = {
+        place.marker_id: {
+            "bearId": bear.bear_id,
+            "gender": bear.gender,
+            "birthYear": bear.birth_year,
+            "capYear": bear.cap_year,
+            "capLat": bear.cap_lat,
+            "capLong": bear.cap_long,
+            "collared": bear.collared.lower()
+        }
+        for place in Place.query.limit(50)}
+
+    return jsonify(places)
+
+
 # @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['POST'])
 # def specific_place_comment():
 #     """If user is logged in, let them comment and rate place. User only see the 
