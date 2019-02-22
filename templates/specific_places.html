@@ -1,5 +1,20 @@
 {% extends 'base.html' %}
 
+{% block head %}
+
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=KEY_GOES_HERE&callback=initMap">
+</script>
+
+  <script src="https://code.jquery.com/jquery.js"></script>
+
+
+  <script src="/static/mapstyles.js"></script>
+  <script src="/static/google_maps.js"></script>
+
+{% endblock %}
+
+
 {% block content %}
     <h2>{{ place_name }}</h2>
 
@@ -69,6 +84,10 @@
       
 
 {% endfor %}
+
+
+  <div id="places-map"></div>
+
 
 
 {% endblock %}

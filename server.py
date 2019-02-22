@@ -196,12 +196,12 @@ def specific_place_page(neighborhood_id, place_id):
     num_comments = len(comments)
     avg_rating = float(sum_comments)/num_comments
 
-
+    google_api_key = os.getenv('google_api_key')
     
 
     return render_template("specific_places.html", place_name=place_name, 
         description=description, neighborhood_id=neighborhood_id, place_id=place_id,
-        comments=comments, avg_rating=avg_rating, num_comments=num_comments)
+        comments=comments, avg_rating=avg_rating, num_comments=num_comments, google_api_key=google_api_key)
 
 
 @app.route('/places-location.json')
