@@ -204,23 +204,23 @@ def specific_place_page(neighborhood_id, place_id):
         comments=comments, avg_rating=avg_rating, num_comments=num_comments, google_api_key=google_api_key)
 
 
-@app.route('/places-location.json')
-def bear_info():
-    """JSON information about place location."""
+# @app.route('/places-location.json')
+# def place_info():
+#     """JSON information about place location."""
 
-    places = {
-        place.place_id: {
-            "place_id": place.place_id,
-            "name": place.name,
-            "neighborhood_id": place.neighborhood_id,
-            "description": place.description,
-            "p_lat": place.p_lat,
-            "p_long": place.p_long,
-            "image_url": place.image_url
-        }
-        for place in Place.query.limit(50)}
+#     places = {
+#         place.place_id: {
+#             "place_id": place.place_id,
+#             "name": place.name,
+#             "neighborhood_id": place.neighborhood_id,
+#             "description": place.description,
+#             "p_lat": place.p_lat,
+#             "p_long": place.p_long,
+#             "image_url": place.image_url
+#         }
+#         for place in Place.query.limit(50)}
 
-    return jsonify(places)
+#     return jsonify(places)
 
 
 # @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['POST'])

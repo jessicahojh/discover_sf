@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+<!-- <script src="https://code.jquery.com/jque ry.js"></script> -->
 
 
 <script
@@ -43,7 +43,16 @@
     <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl-7CXf6ccHeZJQZFO7xVSKWUisBJS6H0&callback=initMap"> 
 
+
+
 </script>
+
+<style>
+#places-map {
+  width: 100%;
+  height: 400px;
+}</style>
+
 {% if "user_id" in session %}
 
     

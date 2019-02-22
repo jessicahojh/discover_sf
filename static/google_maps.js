@@ -20,27 +20,25 @@ function initMap() {
     });
 
 
-    // Retrieving the information with AJAX
-    $.get('/places_location.json', function (places) {
-      // Attach markers to each place location in returned JSON
 
-      let place, marker, html;
+//     // Retrieving the information with AJAX
+//     $.get('/places_location.json', function (places) {
+//       // Attach markers to each place location in returned JSON
 
-      for (let key in places) {
-        place = places[key];
+//       let place, marker, html;
 
-        // Define the marker
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(place.p_lat, place.p_long),
-                map: map,
-                title: 'Place: ' + place.placename,
-            });
+//       for (let key in places) {
+//         place = places[key];
 
-        bindInfoWindow(marker, map, infoWindow, html);
+//         // Define the marker
+//             marker = new google.maps.Marker({
+//                 position: new google.maps.LatLng(place.p_lat, place.p_long),
+//                 map: map,
+//                 title: 'Place: ' + place.placename,
+//             });
 
-      }
-    });
+//         bindInfoWindow(marker, map, infoWindow, html);
+
+//       }
+//     });
 }
-
-
-
