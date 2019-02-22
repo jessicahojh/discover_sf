@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
 {% block head %}
-
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=KEY_GOES_HERE&callback=initMap">
-</script>
-
-  <script src="https://code.jquery.com/jquery.js"></script>
+<!-- <script src="https://code.jquery.com/jquery.js"></script> -->
 
 
-  <script src="/static/mapstyles.js"></script>
-  <script src="/static/google_maps.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  
+
+
+  
+  
 
 {% endblock %}
 
@@ -36,7 +38,12 @@
     </div>
 
     <br>
+    <script src="/static/mapstyles.js"></script>
+    <script src="/static/google_maps.js"></script>
+    <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl-7CXf6ccHeZJQZFO7xVSKWUisBJS6H0&callback=initMap"> 
 
+</script>
 {% if "user_id" in session %}
 
     
@@ -87,7 +94,6 @@
 
 
   <div id="places-map"></div>
-
 
 
 {% endblock %}
