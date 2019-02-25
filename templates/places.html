@@ -10,9 +10,11 @@
             <h3>
               <a href="/neighborhoods/{{ neighborhood_id }}/places/{{p.place_id}}">{{ p.name }}</a>
             <h3>
-              <div> Picture goes here </div>
+              </div>
+              
+              <img style="height: 300px" src="/{{ p.image_url }}">
 
-          </div>
+          
 
       {% endfor %}
     </div>

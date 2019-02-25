@@ -147,19 +147,28 @@ def restaurant_page(neighborhood_id):
      neighborhood_name=neighborhood_name, neighborhood_id=neighborhood_id, comments=comments)
 
 
-# @app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['POST'])
-# def restaurant_page_reaction():
-#     """If a user is logged in, let them add a reaction/comment about restaurants.
-#     User only see the option to comment if they are logged in"""
+@app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['POST'])
+def restaurant_page_reaction():
+    """If a user is logged in, let them add a reaction/comment about restaurants.
+    User only see the option to comment if they are logged in"""
 
-#     user = session.get("user_id")
+    user = session.get("user_id")
 
-#     if not user:
-#         flash("Please log in to add a review")
-#         return redirect('/login-form')
+    fname = request.form["fname"]
+    lname = request.form["lname"]
+    email = request.form["email"]
+    password = request.form["password"]
+    status = request.form["status"]
 
+    new_user = User(fname=fname, lname=lname, email=email, password=password,
+                    status=status)
 
-#     return redirect("/neighborhoods/<int:neighborhood_id>/restaurants")
+    db.session.add(new_user)
+    db.session.commit()
+
+    flash(f"Comment added.")
+
+    return redirect("/neighborhoods/<int:neighborhood_id>/restaurants")
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places", methods=['GET'])
@@ -173,9 +182,10 @@ def places_page(neighborhood_id):
     places = Place.query.filter(Place.neighborhood_id == neighborhood_id).all() #gets specific place object with the id
     # places is a list 
     place_id = Place.place_id
+    image_url = Place.image_url
 
     return render_template("places.html", neighborhood_name=neighborhood_name, 
-        neighborhood_id=neighborhood_id, places=places, place_id=place_id)
+        neighborhood_id=neighborhood_id, places=places, place_id=place_id, image_url=image_url)
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['GET'])
@@ -190,6 +200,7 @@ def specific_place_page(neighborhood_id, place_id):
     place_name = place.name
     description = place.description
     place_id = place.place_id
+    image_url = place.image_url
 
     comments = Place_comment.query.filter(Place_comment.place_id == place_id).all()
 
@@ -203,7 +214,7 @@ def specific_place_page(neighborhood_id, place_id):
 
     return render_template("specific_places.html", place_name=place_name, 
         description=description, neighborhood_id=neighborhood_id, place_id=place_id,
-        comments=comments, avg_rating=avg_rating, num_comments=num_comments, google_api_key=google_api_key)
+        comments=comments, avg_rating=avg_rating, num_comments=num_comments, google_api_key=google_api_key, image_url=image_url)
 
 
 @app.route('/places-location.json')
