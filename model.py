@@ -26,7 +26,7 @@ class User(db.Model):
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(50), nullable=False)
     status = db.Column(db.String(10), nullable=False)
-    image_url = db.Column(db.String(200), nullable=False)
+    #image_url = db.Column(db.String(200), nullable=False)
 
  
     def __repr__(self):

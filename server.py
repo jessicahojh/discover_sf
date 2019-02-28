@@ -13,9 +13,10 @@ from pprint import pprint
 
 import os 
 
-from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
-from flask_dropzone import Dropzone
+from datetime import datetime
 
+# from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
+# from flask_dropzone import Dropzone
 
 
 app = Flask(__name__)
@@ -148,27 +149,21 @@ def restaurant_page(neighborhood_id):
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['POST'])
-def restaurant_page_reaction():
+def restaurant_page_reaction(neighborhood_id):
     """If a user is logged in, let them add a reaction/comment about restaurants.
     User only see the option to comment if they are logged in"""
 
     user = session.get("user_id")
 
-    fname = request.form["fname"]
-    lname = request.form["lname"]
-    email = request.form["email"]
-    password = request.form["password"]
-    status = request.form["status"]
+    comment = request.form["comment"]
+    created_date = datetime.now()
+    neighborhood_id = request.form["neighborhood_id"]
+    
 
-    new_user = User(fname=fname, lname=lname, email=email, password=password,
-                    status=status)
+    new_reaction = Restaurant_reaction(user=user, comment=comment, created_date=created_date, neighborhood_id=neighborhood_id)
 
-    db.session.add(new_user)
+    db.session.add(new_reaction)
     db.session.commit()
-
-    flash(f"Comment added.")
-
-    return redirect("/neighborhoods/<int:neighborhood_id>/restaurants")
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places", methods=['GET'])
@@ -241,17 +236,24 @@ def place_info():
     return jsonify(places)
 
 
-# @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['POST'])
-# def specific_place_comment():
-#     """If user is logged in, let them comment and rate place. User only see the 
-#     option to comment if they are logged in"""
+@app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['POST'])
+def specific_place_comment():
+    """If user is logged in, let them comment and rate place. User only see the 
+    option to comment if they are logged in"""
 
-#     user = session.get("user_id")
+    user = session.get("user_id")
 
+    place_id = request.form["place_id"]
+    comment = request.form["comment"]
+    created_date = request.form["created_date"]
+    rating = request.form["rating"]
+    
 
+    new_comment = Place_comment(user=user, place_id=place_id, comment=comment, created_date=created_date, rating=rating)
 
+    db.session.add(new_comment)
+    db.session.commit()
 
-#     return redirect("/neighborhoods/<int:neighborhood_id>/places/<int:place_id")
 
 
 def yelp_api(neighborhood_name):

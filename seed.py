@@ -10,13 +10,13 @@ from server import app
 def load_users():
     """Load sample users into database."""
 
-    liz = User(fname="Liz", lname="Law", email="liz@gmail.com", password="donut", status="resident", image_url="../static/user_images/liz.jpg")
-    ash = User(fname="Ash", lname="Ma", email="ash@gmail.com", password="lashes", status="resident", image_url="../static/images/neighborhood_images/ash.jpg")
-    tk = User(fname="Tk", lname="Kombarov", email="tk@gmail.com", password="kz", status="resident", image_url="../static/images/neighborhood_images/tk.jpg")
-    jess = User(fname="Jess", lname="Ho", email="jess@gmail.com", password="python", status="resident", image_url="../static/images/neighborhood_images/jess.jpg")
-    chad = User(fname="Chad", lname="Bradley", email="chad@gmail.com", password="ebitda", status="visitor", image_url="../static/images/neighborhood_images/chad.jpg")
-    rachel = User(fname="Rachel", lname="Wang", email="rachel@gmail.com", password="jellyfish", status="visitor", image_url="../static/images/neighborhood_images/rachel.jpg")
-    jon = User(fname="Jon", lname="Whiteaker", email="jon@gmail.com", password="square", status="resident", image_url="../static/images/neighborhood_images/jon.jpg")
+    liz = User(fname="Liz", lname="Law", email="liz@gmail.com", password="donut", status="resident")
+    ash = User(fname="Ash", lname="Ma", email="ash@gmail.com", password="lashes", status="resident")
+    tk = User(fname="Tk", lname="Kombarov", email="tk@gmail.com", password="kz", status="resident")
+    jess = User(fname="Jess", lname="Ho", email="jess@gmail.com", password="python", status="resident")
+    chad = User(fname="Chad", lname="Bradley", email="chad@gmail.com", password="ebitda", status="visitor")
+    rachel = User(fname="Rachel", lname="Wang", email="rachel@gmail.com", password="jellyfish", status="visitor")
+    jon = User(fname="Jon", lname="Whiteaker", email="jon@gmail.com", password="square", status="resident")
 
     db.session.add(liz)
     db.session.add(ash)
@@ -106,9 +106,7 @@ def load_place_comments(place_comments_filename):
 
         p_comment = Place_comment(p_comment_id=p_comment_id, user_id=user_id, place_id=place_id,
             comment=comment, created_date=create_date, rating=rating)
-
         
-
 
         db.session.add(p_comment)
 

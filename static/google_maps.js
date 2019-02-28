@@ -49,7 +49,7 @@ function getRequest() {
 
     
         var map = new google.maps.Map(
-            document.getElementById('places-map'), {zoom: 10, center: currentLocation});
+            document.getElementById('places-map'), {zoom: 15, center: currentLocation});
         
         var marker = new google.maps.Marker({position: currentLocation, map: map});
         
