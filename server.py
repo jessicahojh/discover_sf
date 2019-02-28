@@ -148,7 +148,7 @@ def restaurant_page(neighborhood_id):
      neighborhood_name=neighborhood_name, neighborhood_id=neighborhood_id, comments=comments)
 
 
-@app.route("/neighborhoods/<int:neighborhood_id>/restaurants", methods=['POST'])
+@app.route("/neighborhoods/<int:neighborhood_id>/restaurants.json", methods=['POST'])
 def restaurant_page_reaction(neighborhood_id):
     """If a user is logged in, let them add a reaction/comment about restaurants.
     User only see the option to comment if they are logged in"""
@@ -157,13 +157,25 @@ def restaurant_page_reaction(neighborhood_id):
 
     comment = request.form["comment"]
     created_date = datetime.now()
-    neighborhood_id = request.form["neighborhood_id"]
     
 
-    new_reaction = Restaurant_reaction(user=user, comment=comment, created_date=created_date, neighborhood_id=neighborhood_id)
+    new_reaction = Restaurant_reaction(user_id=user, comment=comment, created_date=created_date, neighborhood_id=neighborhood_id)
 
     db.session.add(new_reaction)
     db.session.commit()
+
+    reaction = {
+        reaction.reaction_id: {
+            "user_id": reaction.user_id,
+            "comment": comment.name,
+            "created_date": reaction.created_date,
+            "neighborhood_id": reaction.neighborhood_id
+            }
+        for reaction in Restaurant_reaction.query.one()}
+
+    #return jsonify(new_reaction)
+
+    # return redirect("/neighborhoods/{}/restaurants".format(neighborhood_id))
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places", methods=['GET'])

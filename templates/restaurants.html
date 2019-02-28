@@ -29,19 +29,26 @@
   <div class="container-fluid">
   <h5>What do you think?:</h5>
 
+
+
     <form action="/neighborhoods/{{neighborhood_id}}/restaurants" id="reaction-form" method="POST">
         <br>
+          <div id='neighborhoodId' style="visibility: hidden;">
+          {{neighborhood_id}}
+          </div>
 
 
-                            <label>Review:</label>
-                            <textarea class="form-control" rows="4" cols="50" name="comment" id="comment" required></textarea>
-                        </div>
-                    </div>
+          <label>Review:</label>
+              <textarea class="form-control" rows="4" cols="50" name="comment" id="comment" required></textarea>
+                  </div>
+                  </div>
                     <br>
                 </div>
             </div>
             
         <button id="submitButton" type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
+
+
         
 
 {% endif %}
