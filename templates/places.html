@@ -6,13 +6,13 @@
     <div>
       {% for p in places %}
 
-          <div>
+          
             <h3>
               <a href="/neighborhoods/{{ neighborhood_id }}/places/{{p.place_id}}">{{ p.name }}</a>
             <h3>
-              </div>
+          
               
-              <a href="/neighborhoods/{{ neighborhood_id }}/places/{{p.place_id}}">
+            <a href="/neighborhoods/{{ neighborhood_id }}/places/{{p.place_id}}">
               <img style="height: 300px" src="/{{ p.image_url }}">
             </a>
 
@@ -20,5 +20,12 @@
 
       {% endfor %}
     </div>
+
+    <script> 
+
+
+
+
+    </script>
 
 {% endblock %}

@@ -36,11 +36,10 @@
     </div>
 
     <br>
-    <script src="/static/mapstyles.js"></script>
+    <!-- <script src="/static/mapstyles.js"></script> -->
     <script src="/static/google_maps.js"></script>
     <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl-7CXf6ccHeZJQZFO7xVSKWUisBJS6H0&callback=initMap"> 
-
+  src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">  // after google map loads, then initMap
 
 
 </script>
@@ -53,9 +52,14 @@
 
 {% if "user_id" in session %}
 
-    
+
+
 <div class="container-fluid">
 <h5>Comment and rate for {{ place_name }}:</h5>
+
+<div id='place_id' style="visibility: hidden;">
+{{place_id}}
+</div>
 
     <form action="/neighborhoods/{{neighborhood_id}}/places/{{place_id}}" id="review-form" enctype=multipart/form-data method="POST">
     <br>
@@ -101,6 +105,10 @@
 
 
   <div id="places-map"></div>
+  <script type="text/javascript">
+    // let placeId = {{ place_id }};   GET IN QUEUE 
+
+  </script>
 
 
 {% endblock %}

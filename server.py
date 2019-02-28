@@ -183,6 +183,8 @@ def places_page(neighborhood_id):
     # places is a list 
     place_id = Place.place_id
     image_url = Place.image_url
+    p_lat = Place.p_lat
+    p_long = Place.p_long
 
     return render_template("places.html", neighborhood_name=neighborhood_name, 
         neighborhood_id=neighborhood_id, places=places, place_id=place_id, image_url=image_url)
@@ -201,6 +203,8 @@ def specific_place_page(neighborhood_id, place_id):
     description = place.description
     place_id = place.place_id
     image_url = place.image_url
+    p_lat = place.p_lat
+    p_long = place.p_long
 
     comments = Place_comment.query.filter(Place_comment.place_id == place_id).all()
 
@@ -231,7 +235,8 @@ def place_info():
             "p_long": place.p_long,
             "image_url": place.image_url
         }
-        for place in Place.query.limit(50)}
+        for place in Place.query.all()}
+
 
     return jsonify(places)
 
