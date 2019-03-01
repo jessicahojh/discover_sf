@@ -259,14 +259,17 @@ def place_info():
     return jsonify(places)
 
 
-@app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['POST'])
-def specific_place_comment(neighborhood_id, place_id):
+@app.route("/neighborhoods/places.json", methods=['POST'])
+def specific_place_comment():
     """If user is logged in, let them comment and rate place. User only see the 
     option to comment if they are logged in"""
 
     user = session.get("user_id")
+    
+    user = User.query.get(user_id)
 
     comment = request.form["food-comment"]
+    place_id = request.form["place_id"]
     created_date = datetime.now()
     rating = request.form["rating-score"]
     
@@ -277,7 +280,17 @@ def specific_place_comment(neighborhood_id, place_id):
     db.session.add(new_comment)
     db.session.commit()
 
-    return redirect("/neighborhoods/{}/places/{}".format(neighborhood_id, place_id))
+    reaction = {
+            "user_first_name": user.fname,
+            "user_last_name": user.lname,
+            "user_status": user.status,
+            "comment": new_comment.comment,
+            "rating":new_comment.rating,
+            "created_date": new_comment.created_date,
+            "place_id": new_comment.place_id
+            } 
+
+    return jsonify(reaction)
 
 
 

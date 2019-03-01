@@ -7,20 +7,15 @@
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
-  
-
-
-  
-  
+  crossorigin="anonymous">
+</script>
 
 {% endblock %}
 
 
 {% block content %}
-    <h2>{{ place_name }}</h2>
-
     
+    <h2>{{ place_name }}</h2>
 
       <div>Overall Rating: {{avg_rating}}</div>
       <div>Number of Reviews: {{num_comments}}</div>
@@ -36,13 +31,12 @@
     </div>
 
     <br>
-    <!-- <script src="/static/mapstyles.js"></script> -->
+
     <script src="/static/google_maps.js"></script>
+
     <script async defer
   src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">  // after google map loads, then initMap
-
-
-</script>
+    </script>
 
 <style>
 #places-map {
@@ -50,46 +44,62 @@
   height: 400px;
 }</style>
 
+
 {% if "user_id" in session %}
 
-
-
 <div class="container-fluid">
-<h5>Comment and rate for {{ place_name }}:</h5>
+<h3>What do you think about {{ place_name }}?:</h3>
 
-<div id='place_id' style="visibility: hidden;">
-{{place_id}}
-</div>
 
-    <form action="/neighborhoods/{{neighborhood_id}}/places/{{place_id}}" id="review-form" enctype=multipart/form-data method="POST">
-    <br>
+    <form action="/neighborhoods/places.json" id="review-form" enctype=multipart/form-data method="POST">
+
+      <div id='placeId' style="visibility: hidden;">
+          {{place_id}}
+      </div>
+
+    <input id='place_id' type='hidden' name='place_id' value='{{place_id}}'>
         <div class="container">
-            <div class="row">
-                <div class="col-9">
-                    <div class="row">
-                        <div class="col">
-                            <label>Rating:</label>
+      
+            <label>Rating:</label>
 
-                            <select class="form-control" name="rating-score" id="rating-score"required>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
+                <select class="form-control" name="rating-score" id="rating-score"required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    </select>
+                    </div>
 
-                            <label>Review:</label>
-                            <textarea class="form-control" rows="4" cols="50" name="food-comment" id="food-comment" required></textarea>
-                        </div>
+                    <br>
+
+                    <label>Review:</label>
+
+                      <textarea class="form-control" rows="4" cols="50" name="food-comment" id="food-comment" required></textarea>
+                  
                     </div>
                     <br>
-                </div>
-            </div>
 
-        <button type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
+        <button id="submitButton" type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
 
 {% endif %}
+
+
+<br>
+
+<div> 
+  <span id="first_name">  </span> <span id="last_name"> </span> <span id="user_status"> </span>
+</div> 
+<div> 
+  <span id="created_date"> </span>
+</div>
+<div> 
+  <span id="rating"> </span>
+</div>
+<div> 
+  <span id="c_comment"> </span>
+</div>
+<br>
 
 {% for comment in comments %}
 
@@ -105,10 +115,39 @@
 
 
   <div id="places-map"></div>
-  <script type="text/javascript">
-    // let placeId = {{ place_id }};   GET IN QUEUE 
 
-  </script>
+<script>
+
+    function getRequest() {
+
+      $('#submitButton').on('click', (evt) => {
+        evt.preventDefault(); //stops the post request form from submitting to the route and refreshing the page. prevents us from going to the .json and to just stay on the same page with the new content added
+
+        const formInputs = {
+          'place_id': $('#place_id').val(), 
+          'comment': $('#comment').val() //grabs the value from id='comment'
+        };
+
+        $.post('/neighborhoods/restaurants.json', formInputs, (results) => {
+          
+          document.getElementById('first_name').innerHTML = results.user_first_name;
+          document.getElementById('last_name').innerHTML = results.user_last_name;
+          document.getElementById('user_status').innerHTML = results.user_status;
+          document.getElementById('c_comment').innerHTML = results.comment;
+          document.getElementById('rating').innerHTML = results.rating;
+          document.getElementById('created_date').innerHTML = results.created_date;
+          $('#comment').val(''); // this clears the comment box 
+          
+         });
+
+
+      }
+      )}
+
+    getRequest();
+
+</script>
+
 
 
 {% endblock %}

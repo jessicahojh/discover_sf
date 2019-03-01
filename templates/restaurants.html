@@ -5,16 +5,16 @@
 
 
     <div>
-      
-      <br>
     
       {% for business in data['businesses'] %}
       
       <br>
       <div>{{business['name']}}</div>
+
       <a href="{{ business['url'] }}">
       <img style="height: 200px" src = "{{business['image_url']}}"/>
       </a>
+
       <div>Rating: {{business['rating']}}</div>
       <div>Reviews: {{business['review_count']}}</div>
       <div>Price: {{business['price']}}</div>
@@ -22,40 +22,36 @@
       {% endfor %}
 
     </div>
+
     <br>
 
-    {% if "user_id" in session %}
+   {% if "user_id" in session %}
 
-  <div class="container-fluid">
-  <h5>What do you think?:</h5>
+   <div class="container-fluid">
 
+   <h3>What do you think?:</h3>
 
-
-    <form action="/neighborhoods/restaurants.json" id="reaction-form" method="POST">
-        <br>
-          <div id='neighborhoodId' style="visibility: hidden;">
+   <form action="/neighborhoods/restaurants.json" id="reaction-form" method="POST">
+       
+        <div id='neighborhoodId' style="visibility: hidden;">
           {{neighborhood_id}}
-          </div>
+        </div>
 
-          <input id='neighborhood_id' type='hidden' name='neighborhood_id' value='{{neighborhood_id}}'>
+         <input id='neighborhood_id' type='hidden' name='neighborhood_id' value='{{neighborhood_id}}'>
 
 
           <label>Review:</label>
               <textarea class="form-control" rows="4" cols="50" name="comment" id="comment" required></textarea>
-                  </div>
-                  </div>
-                    <br>
-                </div>
-            </div>
-            
+
+         <br>
+         <br>   
         <button id="submitButton" type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
 
-      </form>
+   </form>
 
 
-        
+    {% endif %}
 
-{% endif %}
 <br>
 
 <div> 
