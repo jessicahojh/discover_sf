@@ -175,6 +175,7 @@ def restaurant_page_reaction():
     reaction = {
             "user_first_name": user.fname,
             "user_last_name": user.lname,
+            "user_status": user.status,
             "comment": new_reaction.comment,
             "created_date": new_reaction.created_date,
             "neighborhood_id": new_reaction.neighborhood_id

@@ -59,9 +59,15 @@
 <br>
 
 <div> 
-  <span id="first_name">  </span> <span id="last_name">  </span>
+  <span id="first_name">  </span> <span id="last_name"> </span> <span id="user_status"> </span>
 </div> 
 <div> 
+  <span id="created_date"> </span>
+</div>
+<div> 
+  <span id="c_comment"> </span>
+</div>
+<br>
 
 {% for comment in comments %}
 
@@ -95,7 +101,13 @@
           
           document.getElementById('first_name').innerHTML = results.user_first_name;
           document.getElementById('last_name').innerHTML = results.user_last_name;
+          document.getElementById('user_status').innerHTML = results.user_status;
+          document.getElementById('c_comment').innerHTML = results.comment;
+          document.getElementById('created_date').innerHTML = results.created_date;
+          
          });
+
+        
       }
       )}
 
