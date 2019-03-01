@@ -128,7 +128,7 @@ if __name__ == "__main__":
     load_users()
     load_neighborhoods(neighborhood_filename)
     load_places_to_visit(places_filename)
-    # load_restaurant_reactions(rest_reaction_filename)
+    #load_restaurant_reactions(rest_reaction_filename)
     load_place_comments(place_comments_filename)
 
     

@@ -145,37 +145,45 @@ def restaurant_page(neighborhood_id):
       
 
     return render_template("restaurants.html", data=data,
-     neighborhood_name=neighborhood_name, neighborhood_id=neighborhood_id, comments=comments)
+     neighborhood_name=neighborhood_name, neighborhood_id=neighborhood_id,
+    comments=comments)
 
 
-@app.route("/neighborhoods/<int:neighborhood_id>/restaurants.json", methods=['POST'])
-def restaurant_page_reaction(neighborhood_id):
+@app.route("/neighborhoods/restaurants.json", methods=['POST'])
+def restaurant_page_reaction():
     """If a user is logged in, let them add a reaction/comment about restaurants.
     User only see the option to comment if they are logged in"""
 
-    user = session.get("user_id")
+    user_id = session.get("user_id")
+
+    user = User.query.get(user_id)
 
     comment = request.form["comment"]
+    neighborhood_id = request.form["neighborhood_id"]
     created_date = datetime.now()
     
 
-    new_reaction = Restaurant_reaction(user_id=user, comment=comment, created_date=created_date, neighborhood_id=neighborhood_id)
+    new_reaction = Restaurant_reaction(user_id=user_id, comment=comment,
+    created_date=created_date, neighborhood_id=neighborhood_id)
 
     db.session.add(new_reaction)
     db.session.commit()
 
-    reaction = {
-        reaction.reaction_id: {
-            "user_id": reaction.user_id,
-            "comment": comment.name,
-            "created_date": reaction.created_date,
-            "neighborhood_id": reaction.neighborhood_id
-            }
-        for reaction in Restaurant_reaction.query.one()}
-
-    #return jsonify(new_reaction)
-
+    # if were were to refresh and not use AJAX
     # return redirect("/neighborhoods/{}/restaurants".format(neighborhood_id))
+
+    reaction = {
+            "user_first_name": user.fname,
+            "user_last_name": user.lname,
+            "comment": new_reaction.comment,
+            "created_date": new_reaction.created_date,
+            "neighborhood_id": new_reaction.neighborhood_id
+            }  
+        
+
+    return jsonify(reaction)
+
+    
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places", methods=['GET'])
@@ -194,7 +202,8 @@ def places_page(neighborhood_id):
     p_long = Place.p_long
 
     return render_template("places.html", neighborhood_name=neighborhood_name, 
-        neighborhood_id=neighborhood_id, places=places, place_id=place_id, image_url=image_url)
+        neighborhood_id=neighborhood_id, places=places, place_id=place_id,
+        image_url=image_url)
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['GET'])
@@ -225,7 +234,8 @@ def specific_place_page(neighborhood_id, place_id):
 
     return render_template("specific_places.html", place_name=place_name, 
         description=description, neighborhood_id=neighborhood_id, place_id=place_id,
-        comments=comments, avg_rating=avg_rating, num_comments=num_comments, google_api_key=google_api_key, image_url=image_url)
+        comments=comments, avg_rating=avg_rating, num_comments=num_comments,
+        google_api_key=google_api_key, image_url=image_url)
 
 
 @app.route('/places-location.json')
@@ -249,22 +259,24 @@ def place_info():
 
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['POST'])
-def specific_place_comment():
+def specific_place_comment(neighborhood_id, place_id):
     """If user is logged in, let them comment and rate place. User only see the 
     option to comment if they are logged in"""
 
     user = session.get("user_id")
 
-    place_id = request.form["place_id"]
-    comment = request.form["comment"]
-    created_date = request.form["created_date"]
-    rating = request.form["rating"]
+    comment = request.form["food-comment"]
+    created_date = datetime.now()
+    rating = request.form["rating-score"]
     
 
-    new_comment = Place_comment(user=user, place_id=place_id, comment=comment, created_date=created_date, rating=rating)
+    new_comment = Place_comment(user_id=user, place_id=place_id, comment=comment,
+    created_date=created_date, rating=rating)
 
     db.session.add(new_comment)
     db.session.commit()
+
+    return redirect("/neighborhoods/{}/places/{}".format(neighborhood_id, place_id))
 
 
 

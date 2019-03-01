@@ -31,11 +31,13 @@
 
 
 
-    <form action="/neighborhoods/{{neighborhood_id}}/restaurants" id="reaction-form" method="POST">
+    <form action="/neighborhoods/restaurants.json" id="reaction-form" method="POST">
         <br>
           <div id='neighborhoodId' style="visibility: hidden;">
           {{neighborhood_id}}
           </div>
+
+          <input id='neighborhood_id' type='hidden' name='neighborhood_id' value='{{neighborhood_id}}'>
 
 
           <label>Review:</label>
@@ -48,11 +50,18 @@
             
         <button id="submitButton" type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
 
+      </form>
+
 
         
 
 {% endif %}
 <br>
+
+<div> 
+  <span id="first_name">  </span> <span id="last_name">  </span>
+</div> 
+<div> 
 
 {% for comment in comments %}
 
@@ -63,6 +72,36 @@
       <br>
 
 {% endfor %}
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+
+
+<script>
+
+    function getRequest() {
+
+      $('#submitButton').on('click', (evt) => {
+        evt.preventDefault(); //stops the post request form from submitting to the route and refreshing the page. prevents us from going to the .json and to just stay on the same page with the new content added
+
+        const formInputs = {
+          'neighborhood_id': $('#neighborhood_id').val(), 
+          'comment': $('#comment').val() //grabs the value from id='comment'
+        };
+
+        $.post('/neighborhoods/restaurants.json', formInputs, (results) => {
+          
+          document.getElementById('first_name').innerHTML = results.user_first_name;
+          document.getElementById('last_name').innerHTML = results.user_last_name;
+         });
+      }
+      )}
+
+    getRequest();
+
+</script>
 
   
 {% endblock %}
