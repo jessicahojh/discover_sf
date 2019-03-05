@@ -1,4 +1,5 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
+
 {% block content %}
 
   <h1>Top 5 Most Popular Restaurants in {{neighborhood_name}}</h1>
@@ -75,6 +76,7 @@
 
 {% endfor %}
 
+
 <script
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -91,6 +93,7 @@
         const formInputs = {
           'neighborhood_id': $('#neighborhood_id').val(), 
           'comment': $('#comment').val() //grabs the value from id='comment'
+          // no need to grab date
         };
 
         $.post('/neighborhoods/restaurants.json', formInputs, (results) => {
@@ -112,5 +115,4 @@
 
 </script>
 
-  
 {% endblock %}

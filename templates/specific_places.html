@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<!-- <script src="https://code.jquery.com/jque ry.js"></script> -->
 
 
 <script
@@ -15,34 +14,36 @@
 
 {% block content %}
     
-    <h2>{{ place_name }}</h2>
+  <h2>{{ place_name }}</h2>
 
-      <div>Overall Rating: {{avg_rating}}</div>
-      <div>Number of Reviews: {{num_comments}}</div>
+  <div>Overall Rating: {{avg_rating}}</div>
+  <div>Number of Reviews: {{num_comments}}</div>
 
-      <br>
+  <br>
     
-      <img style="height: 300px" src="/{{ image_url }}">
+  <img style="height: 300px" src="/{{ image_url }}">
 
-    <br>
+  <br>
 
-    <div>
-        <p> {{ description }} </p>  
-    </div>
+  <div>
+      <p> {{ description }} </p>  
+  </div>
 
-    <br>
+  <br>
 
-    <script src="/static/google_maps.js"></script>
+  <script src="/static/google_maps.js"></script>
 
-    <script async defer
+  <script async defer
   src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">  // after google map loads, then initMap
-    </script>
+  </script>
 
-<style>
-#places-map {
+  <style>
+  #places-map {
   width: 50%;
   height: 400px;
-}</style>
+  }</style>
+
+  <div id="places-map"></div>
 
 
 {% if "user_id" in session %}
@@ -51,36 +52,39 @@
 <h3>What do you think about {{ place_name }}?:</h3>
 
 
-    <form action="/neighborhoods/places.json" id="review-form" enctype=multipart/form-data method="POST">
+  <form action="/neighborhoods/places.json" id="review-form" enctype=multipart/form-data method="POST">
 
-      <div id='placeId' style="visibility: hidden;">
+    <div id='placeId' style="visibility: hidden;">
           {{place_id}}
-      </div>
+    </div>
 
     <input id='place_id' type='hidden' name='place_id' value='{{place_id}}'>
+        
         <div class="container">
       
             <label>Rating:</label>
 
-                <select class="form-control" name="rating-score" id="rating-score"required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    </select>
-                    </div>
+            <select class="form-control" name="score" id="score"required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
 
-                    <br>
+      <br>
 
-                    <label>Review:</label>
+            <label>Review:</label>
 
-                      <textarea class="form-control" rows="4" cols="50" name="food-comment" id="food-comment" required></textarea>
+                <textarea class="form-control" rows="4" cols="50" name="comment" id="comment" required></textarea>
                   
-                    </div>
-                    <br>
+        </div>
+      <br>
 
         <button id="submitButton" type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
+
+      </form>
 
 {% endif %}
 
@@ -114,7 +118,8 @@
 {% endfor %}
 
 
-  <div id="places-map"></div>
+  
+
 
 <script>
 
@@ -125,10 +130,12 @@
 
         const formInputs = {
           'place_id': $('#place_id').val(), 
-          'comment': $('#comment').val() //grabs the value from id='comment'
+          'comment': $('#comment').val(), //grabs the value from id='comment'
+          'rating': $('#score option:selected').text()
+          // no need to grab date 
         };
 
-        $.post('/neighborhoods/restaurants.json', formInputs, (results) => {
+        $.post('/neighborhoods/places.json', formInputs, (results) => {
           
           document.getElementById('first_name').innerHTML = results.user_first_name;
           document.getElementById('last_name').innerHTML = results.user_last_name;

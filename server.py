@@ -264,17 +264,25 @@ def specific_place_comment():
     """If user is logged in, let them comment and rate place. User only see the 
     option to comment if they are logged in"""
 
-    user = session.get("user_id")
-    
+    print("#### INSIDE ROUTE ###")
+
+    user_id = session.get("user_id")
+
+    print(session)
+
+    print(user_id)
+
     user = User.query.get(user_id)
 
-    comment = request.form["food-comment"]
+    print(request.form)
+
+    comment = request.form["comment"]
     place_id = request.form["place_id"]
     created_date = datetime.now()
-    rating = request.form["rating-score"]
-    
+    rating = request.form["rating"]
 
-    new_comment = Place_comment(user_id=user, place_id=place_id, comment=comment,
+
+    new_comment = Place_comment(user_id=user_id, place_id=place_id, comment=comment,
     created_date=created_date, rating=rating)
 
     db.session.add(new_comment)
