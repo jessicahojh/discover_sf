@@ -281,6 +281,8 @@ def specific_place_comment():
     created_date = datetime.now()
     rating = request.form["rating"]
 
+    print(created_date)
+
 
     new_comment = Place_comment(user_id=user_id, place_id=place_id, comment=comment,
     created_date=created_date, rating=rating)

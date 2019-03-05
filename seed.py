@@ -78,12 +78,12 @@ def load_restaurant_reactions(rest_reaction_filename):
         row = row.rstrip()
 
         # unpack the row
-        reaction_id, user_id, comment, created_date, neighborhood_id = row.split("|")
+        user_id, comment, created_date, neighborhood_id = row.split("|")
   
         create_date = datetime.strptime(created_date, "%b %d, %Y")
     
 
-        r_comment = Restaurant_reaction(reaction_id=reaction_id, user_id=user_id,
+        r_comment = Restaurant_reaction(user_id=user_id,
             comment=comment, created_date=create_date, neighborhood_id=neighborhood_id)
 
         
@@ -100,11 +100,11 @@ def load_place_comments(place_comments_filename):
         row = row.rstrip()
 
         # unpack the row
-        p_comment_id, user_id, place_id, comment, created_date, rating = row.split("|")
+        user_id, place_id, comment, created_date, rating = row.split("|")
 
         create_date = datetime.strptime(created_date, "%b %d, %Y")
 
-        p_comment = Place_comment(p_comment_id=p_comment_id, user_id=user_id, place_id=place_id,
+        p_comment = Place_comment(user_id=user_id, place_id=place_id,
             comment=comment, created_date=create_date, rating=rating)
         
 
@@ -128,7 +128,7 @@ if __name__ == "__main__":
     load_users()
     load_neighborhoods(neighborhood_filename)
     load_places_to_visit(places_filename)
-    #load_restaurant_reactions(rest_reaction_filename)
+    load_restaurant_reactions(rest_reaction_filename)
     load_place_comments(place_comments_filename)
 
     
