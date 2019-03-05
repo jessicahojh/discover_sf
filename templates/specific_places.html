@@ -30,20 +30,21 @@
   </div>
 
   <br>
+  <style>
+    #places-map {
+    width: 50%;
+    height: 400px;
+    }
+  </style>
 
+  <div id="places-map"></div>
   <script src="/static/google_maps.js"></script>
 
   <script async defer
   src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">  // after google map loads, then initMap
   </script>
 
-  <style>
-  #places-map {
-  width: 50%;
-  height: 400px;
-  }</style>
-
-  <div id="places-map"></div>
+  
 
 
 {% if "user_id" in session %}

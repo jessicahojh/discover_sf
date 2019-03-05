@@ -28,16 +28,15 @@ function getLng(locationData, placeId) {
     return locationData[placeId]['p_long'];
 }
 
-
-function getRequest() {
-
+function initMap() {
     $.get('/places-location.json', (locationData) => {  // makes ajax call, saving the data into locationData which is the response from the API call
+        console.log(locationData);
 
+        let placeId = $('#placeId').text();
+        // or let placeId = $('#place_id').val();
+        placeId = parseInt(placeId, 10)
 
-        let placeId = $('#place_id').text();
-        placeId = parseInt(placeId)
-
-        console.log(placeId) 
+        console.log(placeId)
 
 
 
@@ -48,16 +47,15 @@ function getRequest() {
         let currentLocation = {lat: parseFloat(latitude), lng: parseFloat(longitude) * -1}
 
     
-        var map = new google.maps.Map(
-            document.getElementById('places-map'), {zoom: 15, center: currentLocation});
+        const map = new google.maps.Map(
+            document.getElementById('places-map'),
+            {
+                zoom: 15,
+                center: currentLocation
+            }
+        );
         
         var marker = new google.maps.Marker({position: currentLocation, map: map});
         
     });
-        
-  }   
-
-
-function initMap() {
-    getRequest();
 }  
