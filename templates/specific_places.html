@@ -44,7 +44,9 @@
   src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">  // after google map loads, then initMap
   </script>
 
-  
+  <div id='placeId' style="visibility: hidden;">
+          {{place_id}}
+  </div>  
 
 
 {% if "user_id" in session %}
@@ -86,6 +88,10 @@
         <button id="submitButton" type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
 
       </form>
+
+{% else %}  
+ 
+<h3>Sign in to let us know what you think about {{ place_name }}!</h3>  
 
 {% endif %}
 

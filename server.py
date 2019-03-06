@@ -229,6 +229,7 @@ def specific_place_page(neighborhood_id, place_id):
     sum_comments = sum(comment.rating for comment in comments) #list comprehension
     num_comments = len(comments)
     avg_rating = float(sum_comments)/num_comments
+    avg_rating = "{0:.2f}".format(avg_rating) # 2 decimal places
 
     google_api_key = os.getenv('google_api_key')
     
@@ -264,24 +265,16 @@ def specific_place_comment():
     """If user is logged in, let them comment and rate place. User only see the 
     option to comment if they are logged in"""
 
-    print("#### INSIDE ROUTE ###")
 
     user_id = session.get("user_id")
 
-    print(session)
-
-    print(user_id)
-
     user = User.query.get(user_id)
 
-    print(request.form)
 
     comment = request.form["comment"]
     place_id = request.form["place_id"]
     created_date = datetime.now()
     rating = request.form["rating"]
-
-    print(created_date)
 
 
     new_comment = Place_comment(user_id=user_id, place_id=place_id, comment=comment,
