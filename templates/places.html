@@ -1,32 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    
     <h2>Places to visit in {{neighborhood_name}}</h2>
 
-    <div>
+   
+    <div id="places-list" >
+      <div class="row">
+
       {% for p in places %}
 
-          
-            <h3>
-              <a href="/neighborhoods/{{ neighborhood_id }}/places/{{p.place_id}}">{{ p.name }}</a>
-            <h3>
-          
-              
-            <a href="/neighborhoods/{{ neighborhood_id }}/places/{{p.place_id}}">
-              <img style="height: 300px" src="/{{ p.image_url }}">
-            </a>
+      <div class="col-md-4">
+      <div class='card'>
 
+      
+
+      <a href="/neighborhoods/{{ neighborhood_id }}/places/{{p.place_id}}">
+          <img class="card-img-top" style="height: 300px" src="/{{ p.image_url }}">
+      </a>
+
+      <div class='card-body'> 
+
+      <h3>
+        <a href="/neighborhoods/{{ neighborhood_id }}/places/{{p.place_id}}">{{ p.name }}</a>
+      </h3>
+
+    </div>
+  </div>
+</div>
           
 
       {% endfor %}
     </div>
+  </div>
 
-    <script> 
-
-
-
-
-    </script>
 
 {% endblock %}
 
