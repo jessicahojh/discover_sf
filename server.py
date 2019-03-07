@@ -177,7 +177,7 @@ def restaurant_page_reaction():
             "user_last_name": user.lname,
             "user_status": user.status,
             "comment": new_reaction.comment,
-            "created_date": new_reaction.created_date,
+            "created_date": new_reaction.created_date.strftime("%B %d, %Y"),
             "neighborhood_id": new_reaction.neighborhood_id
             }  
         

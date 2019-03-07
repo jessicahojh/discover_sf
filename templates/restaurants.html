@@ -59,16 +59,7 @@
 
 <br>
 
-<div> 
-  <span id="first_name">  </span> <span id="last_name"> </span> <span id="user_status"> </span>
-</div> 
-<div> 
-  <span id="created_date"> </span>
-</div>
-<div> 
-  <span id="c_comment"> </span>
-</div>
-<br>
+<div id='comment_section' >
 
 {% for comment in comments %}
 
@@ -101,12 +92,28 @@
         };
 
         $.post('/neighborhoods/restaurants.json', formInputs, (results) => {
+
+
+          var html = '<div>' + 
+                      '<span id="first_name">  </span> <span id="last_name">' + 
+                      '</span> <span id="user_status"> </span>' +
+                      '</div>' +
+                      '<div>' +
+                      '<span id="created_date"> </span>' +
+                      '</div>' +
+                      '<div>' + 
+                      '<span id="c_comment"> </span>' +
+                      '</div>' +
+                      '<br>'
           
+          $('#comment_section').prepend(html);
+
+
           document.getElementById('first_name').innerHTML = results.user_first_name;
           document.getElementById('last_name').innerHTML = results.user_last_name;
-          document.getElementById('user_status').innerHTML = results.user_status;
-          document.getElementById('c_comment').innerHTML = results.comment;
-          document.getElementById('created_date').innerHTML = results.created_date;
+          document.getElementById('user_status').innerHTML = "(" + results.user_status + ")";
+          document.getElementById('c_comment').innerHTML = "Comment: " + results.comment;
+          document.getElementById('created_date').innerHTML = "Date: " + results.created_date;
           $('#comment').val(''); // this clears the comment box 
           
          });
