@@ -4,19 +4,26 @@
     <h2>Neighborhoods</h2>
 
     <div id="neighborhood-list" >
+      <div class="row">
       {% for n in neighborhood %}
-
-          <div>
+        <div class="col-md-4">
+          <div class='card'>
+            <img class="card-img-top" style="height: 300px" src="{{ n.image_url }}">
+          <div class='card-body'>
             <h3>
               <a href="/neighborhoods/{{ n.neighborhood_id }}">{{ n.name }}</a>
+            </h3>
             <h3>
               <a href="/neighborhoods/{{ n.neighborhood_id }}">
-              <img style="height: 300px" src="{{ n.image_url }}">
-            </a>
+              
+            </a></h3>
 
-          </div>
+          </div> 
+        </div>
+      </div>
 
       {% endfor %}
+    </div>
     </div>
 
 {% endblock %}

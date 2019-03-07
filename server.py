@@ -206,6 +206,17 @@ def places_page(neighborhood_id):
         neighborhood_id=neighborhood_id, places=places, place_id=place_id,
         image_url=image_url)
 
+def comments_total_avg(place_id):
+
+    comments = Place_comment.query.filter(Place_comment.place_id == place_id).order_by(Place_comment.created_date.desc()).all()
+
+
+    sum_comments = sum(comment.rating for comment in comments) #list comprehension
+    num_comments = len(comments)
+    avg_rating = float(sum_comments)/num_comments
+    avg_rating = "{0:.2f}".format(avg_rating) # 2 decimal places
+
+    return (num_comments, avg_rating)
 
 @app.route("/neighborhoods/<int:neighborhood_id>/places/<int:place_id>", methods=['GET'])
 def specific_place_page(neighborhood_id, place_id):
@@ -223,13 +234,14 @@ def specific_place_page(neighborhood_id, place_id):
     p_lat = place.p_lat
     p_long = place.p_long
 
-    comments = Place_comment.query.filter(Place_comment.place_id == place_id).all()
+    comments = Place_comment.query.filter(Place_comment.place_id == place_id).order_by(Place_comment.created_date.desc()).all()
 
+    num_comments, avg_rating = comments_total_avg(place_id)
 
-    sum_comments = sum(comment.rating for comment in comments) #list comprehension
-    num_comments = len(comments)
-    avg_rating = float(sum_comments)/num_comments
-    avg_rating = "{0:.2f}".format(avg_rating) # 2 decimal places
+    # sum_comments = sum(comment.rating for comment in comments) #list comprehension
+    # num_comments = len(comments)
+    # avg_rating = float(sum_comments)/num_comments
+    # avg_rating = "{0:.2f}".format(avg_rating) # 2 decimal places
 
     google_api_key = os.getenv('google_api_key')
     
@@ -283,14 +295,19 @@ def specific_place_comment():
     db.session.add(new_comment)
     db.session.commit()
 
+    comments_total, avg_rating = comments_total_avg(place_id)
+
+
     reaction = {
             "user_first_name": user.fname,
             "user_last_name": user.lname,
             "user_status": user.status,
             "comment": new_comment.comment,
             "rating":new_comment.rating,
-            "created_date": new_comment.created_date,
-            "place_id": new_comment.place_id
+            "created_date": new_comment.created_date.strftime("%B %d, %Y"),
+            "place_id": new_comment.place_id,
+            "comments_total": comments_total,
+            "avg_rating": avg_rating
             } 
 
     return jsonify(reaction)

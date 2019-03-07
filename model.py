@@ -42,7 +42,7 @@ class Neighborhood(db.Model): # for referential integrity
 
     neighborhood_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.String(500), nullable=False)
+    description = db.Column(db.String(5000), nullable=False)
     image_url = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
@@ -82,7 +82,7 @@ class Place(db.Model):  # for referential integrity
     place_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String(100))
     neighborhood_id = db.Column(db.Integer, db.ForeignKey('neighborhoods.neighborhood_id'))
-    description = db.Column(db.String(500), nullable=False)
+    description = db.Column(db.String(5000), nullable=False)
     p_lat = db.Column(db.String(15), nullable=True)
     p_long = db.Column(db.String(15), nullable=True)
     image_url = db.Column(db.String(200), nullable=False) 
