@@ -2,66 +2,72 @@
 
 {% block content %}
 
-  <h1>Top 5 Most Popular Restaurants in {{neighborhood_name}}</h1>
+<div class='container' > 
+
+  <div class='row'>
+
+    <div class='col'>
+
+       <h1>Top 5 Most Popular Restaurants in {{neighborhood_name}}</h1>
 
 
-    <div>
-    
-      {% for business in data['businesses'] %}
+       {% for business in data['businesses'] %}
       
-      <br>
-      <div>{{business['name']}}</div>
+        <br>
+      
+        <div>{{business['name']}}</div>
 
-      <a href="{{ business['url'] }}">
-      <img style="height: 200px" src = "{{business['image_url']}}"/>
-      </a>
+        <a href="{{ business['url'] }}">
+        <img style="height: 200px" src = "{{business['image_url']}}"/>
+        </a>
 
-      <div>Rating: {{business['rating']}}</div>
-      <div>Reviews: {{business['review_count']}}</div>
-      <div>Price: {{business['price']}}</div>
+          <div>Rating: {{business['rating']}}</div>
+          <div>Reviews: {{business['review_count']}}</div>
+          <div>Price: {{business['price']}}</div>
 
-      {% endfor %}
+       {% endfor %}
 
-    </div>
 
-    <br>
+        <br>
+
+     </div> <!-- col -->
+
+
+  <div class='col' >
 
    {% if "user_id" in session %}
 
-   <div class="container-fluid">
-
    <h3>What do you think?:</h3>
 
-   <form action="/neighborhoods/restaurants.json" id="reaction-form" method="POST">
+      <form action="/neighborhoods/restaurants.json" id="reaction-form" method="POST">
        
-        <div id='neighborhoodId' style="visibility: hidden;">
-          {{neighborhood_id}}
-        </div>
+      <div id='neighborhoodId' style="visibility: hidden;">
+          {{neighborhood_id}} </div>
 
-         <input id='neighborhood_id' type='hidden' name='neighborhood_id' value='{{neighborhood_id}}'>
+      <input id='neighborhood_id' type='hidden' name='neighborhood_id' value='{{neighborhood_id}}'>
 
 
-          <label>Review:</label>
-              <textarea class="form-control" rows="4" cols="50" name="comment" id="comment" required></textarea>
+      <label>Review:</label>
+          <textarea class="form-control" rows="4" cols="50" name="comment" id="comment" required></textarea>
 
-         <br>
-         <br>   
+         <br> 
+
         <button id="submitButton" type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
 
-   </form>
+     </form>
 
 
-  {% else %}  
+     {% else %}  
  
-   <h3>Sign in to let us know what you think!</h3>
+      <h3>Sign in to let us know what you think!</h3>
+   
+      {% endif %}
 
-  {% endif %}
+      <br>
 
-<br>
+      <div id='comment_section' >
 
-<div id='comment_section' >
-
-{% for comment in comments %}
+      {% for comment in comments %}
 
       <div>{{comment.user['fname']}} {{comment.user['lname']}} ({{comment.user['status']}})</div>
       <div>Date: {{comment['created_date'].strftime("%B %d, %Y")}}</div>
@@ -69,7 +75,13 @@
       <br>
       <br>
 
-{% endfor %}
+      {% endfor %}
+
+      </div>
+  </div>
+</div>
+</div>
+
 
 
 <script

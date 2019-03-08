@@ -4,37 +4,37 @@
 
 
 
-
 {% endblock %}
 
 
 {% block content %}
     
-  <h2>{{ place_name }}</h2>
+<h2>{{ place_name }}</h2>
 
-  <div> Overall Rating: <span id='avg-rating' > {{avg_rating}} </span> </div>
-  <div> Number of Reviews: <span id='num-comments' > {{num_comments}}</div>
+<div> Overall Rating: <span id='avg-rating' > {{avg_rating}} </span> </div>
+<div> Number of Reviews: <span id='num-comments' > {{num_comments}} </span></div>
 
-  <br>
-    
-  <img style="height: 400px" src="/{{ image_url }}">
+<br>
 
-  <br>
 
-  <div>
-      <p> {{ description }} </p>  
-  </div>
+<div class="container">  
+<div class="row">
 
-  <br>
+
+  
+  <div class="col"> <img style="height: 400px" src="/{{ image_url }}">  </div>
+
+
   <style>
     #places-map {
-    width: 50%;
+    width: 100%;
     height: 400px;
     }
   </style>
 
-  <div id="places-map"></div>
+  <div class="col"> <div id="places-map"></div> </div>
   <script src="/static/google_maps.js"></script>
+
 
   <script async defer
   src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">  // after google map loads, then initMap
@@ -42,8 +42,13 @@
 
   <div id='placeId' style="visibility: hidden;">
           {{place_id}}
-  </div>  
+  </div> 
 
+ 
+
+  <div>
+      <p> {{ description }} </p>  
+  </div>
 
 {% if "user_id" in session %}
 
