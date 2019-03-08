@@ -2,6 +2,17 @@
 
 {% block content %}
 
+<style>
+
+div {
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+</style>
+
 <div class='container' > 
 
   <div class='row'>
@@ -12,10 +23,26 @@
 
 
        {% for business in data['businesses'] %}
+
+       <div class="card" style="width: 18rem;">
+  <a href="{{ business['url'] }}">      
+  <img class="card-img-top" src="{{business['image_url']}}" alt="Card image cap">
+  </a>
+  <div class="card-body">
+    <h5 class="card-title">{{business['name']}}</h5>
+    
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Rating: {{business['rating']}}</li>
+    <li class="list-group-item">Reviews: {{business['review_count']}}</li>
+    <li class="list-group-item">Price: {{business['price']}}</li>
+  </ul>
+  
+</div>
       
         <br>
       
-        <div>{{business['name']}}</div>
+        <!-- <div>{{business['name']}}</div>
 
         <a href="{{ business['url'] }}">
         <img style="height: 200px" src = "{{business['image_url']}}"/>
@@ -23,7 +50,7 @@
 
           <div>Rating: {{business['rating']}}</div>
           <div>Reviews: {{business['review_count']}}</div>
-          <div>Price: {{business['price']}}</div>
+          <div>Price: {{business['price']}}</div> -->
 
        {% endfor %}
 

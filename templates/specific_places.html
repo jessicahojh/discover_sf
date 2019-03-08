@@ -8,58 +8,75 @@
 
 
 {% block content %}
+
     
 <h2>{{ place_name }}</h2>
 
-<div> Overall Rating: <span id='avg-rating' > {{avg_rating}} </span> </div>
-<div> Number of Reviews: <span id='num-comments' > {{num_comments}} </span></div>
+<div> 
+  Overall Rating: <span id='avg-rating' > {{avg_rating}} </span> 
+</div>
+
+<div> 
+  Number of Reviews: <span id='num-comments' > {{num_comments}} </span>
+</div>
+
 
 <br>
 
 
 <div class="container">  
-<div class="row">
+    <div class="row">
 
 
   
-  <div class="col"> <img style="height: 400px" src="/{{ image_url }}">  </div>
+      <div 
+      class="col"> <img style="height: 400px" src="/{{ image_url }}">  
+      </div>
 
 
-  <style>
-    #places-map {
-    width: 100%;
-    height: 400px;
-    }
-  </style>
+      <style>
+        #places-map {
+        width: 100%;
+        height: 400px;
+        }
+      </style>
 
-  <div class="col"> <div id="places-map"></div> </div>
-  <script src="/static/google_maps.js"></script>
+      <div class="col"> 
+        <div id="places-map"></div> 
+      </div>
+  
+      <script src="/static/google_maps.js"></script>
 
 
-  <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">  // after google map loads, then initMap
-  </script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">  // after google map loads, then initMap
+      </script>
 
-  <div id='placeId' style="visibility: hidden;">
-          {{place_id}}
-  </div> 
+      <div id='placeId' style="visibility: hidden;">
+                  {{place_id}}
+      </div> 
 
- 
 
-  <div>
-      <p> {{ description }} </p>  
+      <div>
+          <br>
+          <p> {{ description }} </p>  
+      </div>
+
+    </div>
   </div>
+
+
 
 {% if "user_id" in session %}
 
 <div class="container-fluid">
-<h3>What do you think about {{ place_name }}?:</h3>
+    <h3>What do you think about {{ place_name }}?:</h3>
 
 
-  <form action="/neighborhoods/places.json" id="review-form" enctype=multipart/form-data method="POST">
+    <form action="/neighborhoods/places.json" id="review-form" enctype=multipart/form-data method="POST">
 
     <div id='placeId' style="visibility: hidden;">
-          {{place_id}}
+               {{place_id}}
     </div>
 
     <input id='place_id' type='hidden' name='place_id' value='{{place_id}}'>
@@ -77,7 +94,7 @@
             </select>
         </div>
 
-      <br>
+              <br>
 
             <label>Review:</label>
 
@@ -99,9 +116,9 @@
 
 <br>
 
-<div id='comment_section' >
+<div id='comment_section'>
 
-{% for comment in comments %}
+  {% for comment in comments %}
 
       <div>{{comment.user['fname']}} {{comment.user['lname']}} ({{comment.user['status']}})</div>
       <div>Date: {{comment['created_date'].strftime("%B %d, %Y")}}</div>
@@ -111,12 +128,11 @@
       <br>
       
 
-{% endfor %}
+  {% endfor %}
 
 </div>
 
   
-
 
 <script>
 
