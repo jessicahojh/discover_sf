@@ -1,23 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<style>
-
-.carousel-vertical {
-  top: 50%;
-  transform: translateY(-50%);
-  bottom: initial;
-
-}
-
-</style>
-
-<!--   <h1>Explore San Francisco </h1> -->
-
-  <body>
 
 
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<body background="/static/other_images/gg_bridge.jpg">
+  <div class="carousel-caption carousel-vertical" >
+      <a href="/neighborhoods">
+        <button type="button" class="btn btn-outline-dark">Let's Explore!
+        </button>
+      </a>
+  </div>
+
+</body>
+
+
+<!-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -62,7 +59,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div>
+</div> -->
 
   <!-- <body background="/static/other_images/san_francisco_city.jpg"> -->
 
@@ -71,7 +68,7 @@
 <!--   <p>
     <a href="/neighborhoods"><button type="button" class="btn btn-primary">Let's Explore!</button></a>
   </p> -->
-</body>
+
 
 
 {% endblock %}

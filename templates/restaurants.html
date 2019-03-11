@@ -2,26 +2,6 @@
 
 {% block content %}
 
-<style>
-
-div {
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-}
-
-img:hover {
-    opacity: 0.5;
-    filter: alpha(opacity=40);
-}
-
-img: {
-    opacity: 1.0;
-    filter: alpha(opacity=100);
-}
-
-</style>
 
 <div class='container' > 
 
@@ -35,20 +15,21 @@ img: {
        {% for business in data['businesses'] %}
 
        <div class="card" style="width: 18rem;">
-  <a href="{{ business['url'] }}">      
-  <img class="card-img-top" src="{{business['image_url']}}" alt="Card image cap">
-  </a>
-  <div class="card-body">
-    <h5 class="card-title">{{business['name']}}</h5>
+          <a href="{{ business['url'] }}">      
+            <img class="card-img-top" src="{{business['image_url']}}" alt="Card image cap">
+          </a>
+      <div class="card-body">
+      <h5 class="card-title">{{business['name']}}</h5>
     
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Rating: {{business['rating']}}</li>
-    <li class="list-group-item">Reviews: {{business['review_count']}}</li>
-    <li class="list-group-item">Price: {{business['price']}}</li>
-  </ul>
+      </div>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Rating: {{business['rating']}}</li>
+        <li class="list-group-item">Reviews: {{business['review_count']}}</li>
+        <li class="list-group-item">Price: {{business['price']}}</li>
+    </ul>
   
-</div>
+        </div>
       
         <br>
       
@@ -143,7 +124,20 @@ img: {
         $.post('/neighborhoods/restaurants.json', formInputs, (results) => {
 
 
-          var html = '<div>' + 
+          var html = 
+                          // '<div class="card" style="width: 18rem;">' +
+          //             '<div class="card-header">' +
+          //               'Featured' +
+          //             '</div>' +
+          //             '<ul class="list-group list-group-flush">' +
+          //               '<li class="list-group-item" id="first_name" ></li>' +
+          //               '<li class="list-group-item" id="user_status"></li>' +
+          //               '<li class="list-group-item" id="created_date"></li>' +
+          //               '<li class="list-group-item" id="c_comment"></li>' +
+          //             '</ul>' +
+          //           '</div>' +
+
+                      '<div>' + 
                       '<span id="first_name">  </span> <span id="last_name">' + 
                       '</span> <span id="user_status"> </span>' +
                       '</div>' +

@@ -4,53 +4,39 @@
 
 <style>
 
-div {
+  div {
   padding-top: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
 }
 
-h2 {  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20%;
-  font-family: 'Oswald', sans-serif;
-}
+h2 { 
+  color:rgb(164, 39, 24);
 
-img:hover {
-    opacity: 0.5;
-    filter: alpha(opacity=40);
 }
-
-img: {
-    opacity: 1.0;
-    filter: alpha(opacity=100);
-}
-
 
 </style>
 
-    <h2>NEIGHBORHOODS</h2>
+    <h2>Neighborhoods</h2>
 
-    <div id="neighborhood-list" >
+    <div id="neighborhood-list">
       <div class="row">
        {% for n in neighborhood %}
         <div class="col-md-4">
-        <div class='card'>
+         <div class='card'>
 
-        <a href="/neighborhoods/{{ n.neighborhood_id }}"> <img class="card-img-top" style="height: 300px" src="{{ n.image_url }}">
+           <a href="/neighborhoods/{{ n.neighborhood_id }}"> <img class="card-img-top" style="height: 300px" src="{{ n.image_url }}">
         
-        <div class='card-body'> 
+            <div class='card-body'> 
             
-        <h3>
-          <a href="/neighborhoods/{{ n.neighborhood_id }}">{{ n.name }}</a>
+           <h3>
+              <a href="/neighborhoods/{{ n.neighborhood_id }}">{{ n.name }}</a>
 
-        </h3>
+           </h3>
            
-
-          </div> 
-        </div>
+            </div> 
+         </div>
       </div>
 
       {% endfor %}

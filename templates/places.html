@@ -4,35 +4,26 @@
 
 <style>
 
-div {
+  div {
   padding-top: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
 }
 
-h2 {  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20%;}
+h2 { 
+  color:rgb(164, 39, 24);
 
-img:hover {
-    opacity: 0.5;
-    filter: alpha(opacity=40);
 }
-
-img {
-    opacity: 1.0;
-    filter: alpha(opacity=100);
-}
-
 
 </style>
+
+
     
-    <h2>Places to visit in {{neighborhood_name}}</h2>
+<h2>Places to visit in {{neighborhood_name}}</h2>
 
    
-    <div id="places-list" >
+  <div id="places-list">
       <div class="row">
 
       {% for p in places %}
@@ -40,11 +31,10 @@ img {
       <div class="col-md-4">
       <div class='card'>
 
-      
 
-      <a href="/neighborhoods/{{ neighborhood_id }}/places/{{p.place_id}}">
-          <img class="card-img-top" style="height: 300px" src="/{{ p.image_url }}">
-      </a>
+        <a href="/neighborhoods/{{ neighborhood_id }}/places/{{p.place_id}}">
+            <img class="card-img-top" style="height: 300px" src="/{{ p.image_url }}">
+        </a>
 
       <div class='card-body'> 
 
@@ -52,7 +42,7 @@ img {
         <a href="/neighborhoods/{{ neighborhood_id }}/places/{{p.place_id}}">{{ p.name }}</a>
       </h3>
 
-    </div>
+      </div>
   </div>
 </div>
           

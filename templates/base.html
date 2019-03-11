@@ -26,6 +26,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
 src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
 </script>
 
+<link rel="stylesheet" href="/static/css/style.css">
+
 </head>
 
 <style>
@@ -36,24 +38,28 @@ nav {
 
 <body>
 
-<body style="background-color:Silver;">
+<body style="background-color:rgb(193, 224, 241);">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+  <a class="navbar-brand" href="/">Discover SAN FRANCISCO</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#">Features</a>
-      <a class="nav-item nav-link" href="#">Pricing</a>
-      <a class="nav-item nav-link disabled" href="#">Disabled</a>
+      <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/neighborhoods">Neighborhoods</a>
+      {% if "user_id" in session %}
+        <a class="nav-item nav-link" href="/logout">Logout</a>
+        {% else %}
+        <a class="nav-item nav-link" href="/login">Login</a>
+        {% endif %}
+      
     </div>
   </div>
 </nav>
 
-Explore San Francisco
+<!-- Explore San Francisco
 
 {% if "user_id" in session %}
   <a href="/logout">Logout</a>
@@ -65,7 +71,7 @@ Explore San Francisco
 
 {% for flash in get_flashed_messages() %}
   {{ flash }}
-{% endfor %}
+{% endfor %} -->
 
 {% block content %}
   Put your body here.
