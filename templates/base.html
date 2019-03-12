@@ -40,24 +40,69 @@ nav {
 
 <body style="background-color:rgb(193, 224, 241);">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+
+   <!-- Nav Bar -->
+    <div class="container-fluid" id="navbar">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <a class="navbar-brand" href="/">
+                <img src="/static/other_images/golden-state.svg" width="40" height="40" alt="">
+              </a>
+            <a class="navbar-brand" href="/">
+              Discover San Francisco
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link nav"  href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/neighborhoods">Neighborhoods</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">About Us</a>
+                </li>
+              </ul> 
+
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  {% if "user_id" in session %}
+                  <a class="nav-link" href="/logout">Logout</a>
+                  {% else %}
+                  <a class="nav-item nav-link" href="/login">Login</a>
+                  {% endif %}
+                </li>
+              </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+  <div class="mr-auto">
   <a class="navbar-brand" href="/">Discover SAN FRANCISCO</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="/neighborhoods">Neighborhoods</a>
+    </div>
+  </div>
+  </div>
+      <div class="ml-auto">
       {% if "user_id" in session %}
         <a class="nav-item nav-link" href="/logout">Logout</a>
         {% else %}
         <a class="nav-item nav-link" href="/login">Login</a>
         {% endif %}
-      
-    </div>
-  </div>
-</nav>
+      </div>
+      </nav> -->
 
 <!-- Explore San Francisco
 

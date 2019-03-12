@@ -1,194 +1,228 @@
 {% extends 'base.html' %}
 
-{% block head %}
-
-
-
-{% endblock %}
-
 
 {% block content %}
 
-    
-<h2>{{ place_name }}</h2>
+<style>
+  .comment-class {
 
-<div> 
-  Overall Rating: <span id='avg-rating' > {{avg_rating}} </span> 
-</div>
+    background: rgba(255,255,255,0.5);
+    padding: 25px;
+    border-radius: 10px;
+    height: 100%;
+    margin-bottom: 15px ;
+  }
 
-<div> 
-  Number of Reviews: <span id='num-comments' > {{num_comments}} </span>
-</div>
+  .ratings {
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+    color: #b1b1b1;
+    overflow: hidden;
+}
+.full-stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #fde16d;
+}
+.empty-stars:before, .full-stars:before {
+    content:"\2605\2605\2605\2605\2605";
+    font-size: 14pt;
+}
+.empty-stars:before {
+    -webkit-text-stroke: 1px #848484;
+}
+.full-stars:before {
+    -webkit-text-stroke: 1px orange;
+}
+/* Webkit-text-stroke is not supported on firefox or IE */
+
+/* Firefox */
+ @-moz-document url-prefix() {
+    .full-stars {
+        color: #ECBE24;
+    }
+}
+/* IE */
+ <!--[if IE]> .full-stars {
+    color: #ECBE24;
+}
+<![endif]-->
 
 
-<br>
+</style>
 
-
-<div class="container">  
-    <div class="row">
-
-
-  
-      <div 
-      class="col"> <img style="height: 400px" src="/{{ image_url }}">  
-      </div>
-
-
-      <style>
-        #places-map {
-        width: 100%;
-        height: 400px;
-        }
-      </style>
-
-      <div class="col"> 
-        <div id="places-map"></div> 
-      </div>
-  
-      <script src="/static/google_maps.js"></script>
-
-
-      <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">  // after google map loads, then initMap
-      </script>
-
-      <div id='placeId' style="visibility: hidden;">
-                  {{place_id}}
-      </div> 
-
-
-      <div>
-          <br>
-          <p> {{ description }} </p>  
-      </div>
-
+<div class="container">
+  <div class="row">
+    <br>
+    <br>
+  </div>
+  <div class="row">
+    <div class='col-md-12'>
+      <h2>{{ place_name }}</h2>
     </div>
   </div>
+  <div class="row">
+    <div class='col-md-12'>
 
+      <div class="ratings">
+        <div class="empty-stars"></div>
+        <div class="full-stars" style="width:{{avg_rating|float/5*100}}%"></div>
+      </div>
 
-
-{% if "user_id" in session %}
-
-<div class="container-fluid">
-    <h3>What do you think about {{ place_name }}?:</h3>
-
-
-    <form action="/neighborhoods/places.json" id="review-form" enctype=multipart/form-data method="POST">
-
-    <div id='placeId' style="visibility: hidden;">
-               {{place_id}}
+      <!-- <div> 
+        Overall Rating: <span id='avg-rating' > {{avg_rating}} </span> 
+      </div> -->
     </div>
+  </div>
+  <div class="row">
+    <div class='col-md-12'>
+      <div> 
+        Reviews: <span id='num-comments' > {{num_comments}} </span>
+      </div>
+    </div>
+  </div>
+  <br>
 
-    <input id='place_id' type='hidden' name='place_id' value='{{place_id}}'>
-        
-        <div class="container">
-      
-            <label>Rating:</label>
-
-            <select class="form-control" name="score" id="score"required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        
-
-              <br>
-
-            <label>Review:</label>
-
-                <textarea class="form-control"  name="comment" id="comment" required></textarea>
-                  
-        </div>
-        </div>
+  <br>
+  <div class="row">
+    <div 
+      class="col"> <img style="height: 400px" src="/{{ image_url }}">  
+    </div>
+    <style>
+      #places-map {
+      width: 100%;
+      height: 400px;
+      }
+    </style>
+    <div class="col">
+      <div id="places-map"></div>
+    </div>
+    <script src="/static/google_maps.js"></script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">  // after google map loads, then initMap</script>
+    <div id='placeId' style="visibility: hidden;">
+      {{place_id}}
+    </div>
+    <div>
       <br>
+      <p> {{ description }} </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class='col-md-4'> 
+    </div>
+    <div class='col-md-4'>
 
-        <button id="submitButton" type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
-
+      {% if "user_id" in session %}
+      <div class="container-fluid">
+        <h3>What do you think about {{ place_name }}?:</h3>
+        <form action="/neighborhoods/places.json" id="review-form" enctype=multipart/form-data method="POST">
+          <div id='placeId' style="visibility: hidden;">
+            {{place_id}}
+          </div>
+          <input id='place_id' type='hidden' name='place_id' value='{{place_id}}'>
+          <div class="container">
+            <label>Rating:</label>
+            <select class="form-control" name="score" id="score"required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <br>
+            <label>Review:</label>
+            <textarea class="form-control"  name="comment" id="comment" required></textarea>
+          </div>
+      </div>
+      <br>
+      <button id="submitButton" type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
+      <br>
       </form>
 
-{% else %}  
 
-<h3>Sign in to let us know what you think about {{ place_name }}!</h3>  
+      {% else %}  
+      <h3>Sign in to let us know what you think about {{ place_name }}!</h3>
+      {% endif %}
 
-{% endif %}
+    </div>
+    </div>
+    <div class='row' id='comment_section'>  
+        {% for comment in comments %}
+        <div class='col-md-4' style='margin-bottom:30px'>
+          <div class='comment-class'>
+        <div>{{comment.user['fname']}} {{comment.user['lname']}} ({{comment.user['status']}})</div>
+        <div>Date: {{comment['created_date'].strftime("%B %d, %Y")}}</div>
+        <div>Rating: {{comment['rating']}}</div>
+        <div>Comment: {{comment['comment']}}</div>
+      </div>
+    </div>
+        <br>
+        <br>
+        {% endfor %}
+      </div>
+      <script>
+        function getRequest() {
+        
+          $('#submitButton').on('click', (evt) => {
+            evt.preventDefault(); //stops the post request form from submitting to the route and refreshing the page. prevents us from going to the .json and to just stay on the same page with the new content added
+        
+            const formInputs = {
+              'place_id': $('#place_id').val(), 
+              'comment': $('#comment').val(), //grabs the value from id='comment'
+              'rating': $('#score option:selected').text()
+              // no need to grab date 
+            };
+        
+            $.post('/neighborhoods/places.json', formInputs, (results) => {
+        
+            var html = '<div> '+ 
+                        '<span id="first_name">  </span> <span id="last_name">' +
+                        '</span> <span id="user_status"> </span>' +
+                      '</div>' + 
+                      '<div> ' +
+                      '  <span id="created_date"> </span>' +
+                      '</div>' +
+                      '<div> ' +
+                      '  <span id="rating"> </span>' +
+                      '</div>' +
+                      '<div> ' +
+                      '  <span id="c_comment"> </span>' +
+                      '</div>' +
+                      '<br>' 
+        
+              $('#comment_section').prepend(html);
+              
+              document.getElementById('first_name').innerHTML = results.user_first_name;
+              document.getElementById('last_name').innerHTML = results.user_last_name;
+              document.getElementById('user_status').innerHTML = "(" + results.user_status + ")";
+              document.getElementById('c_comment').innerHTML = "Comment: " + results.comment;
+              document.getElementById('rating').innerHTML = "Rating: " + results.rating;
+              document.getElementById('created_date').innerHTML = "Date: " + results.created_date;
+        
+              document.getElementById('avg-rating').innerHTML = results.avg_rating;
+              document.getElementById('num-comments').innerHTML = results.comments_total;
+        
+              $('#comment').val(''); // this clears the comment box 
+              
+             });
+        
+        
+          }
+          )}
+        
+        getRequest();
+        
+      </script>
+    </div>
+  </div>
+</div>  
 
 
-<br>
-
-<div id='comment_section'>
-
-  {% for comment in comments %}
-
-      <div>{{comment.user['fname']}} {{comment.user['lname']}} ({{comment.user['status']}})</div>
-      <div>Date: {{comment['created_date'].strftime("%B %d, %Y")}}</div>
-      <div>Rating: {{comment['rating']}}</div>
-      <div>Comment: {{comment['comment']}}</div>
-      <br>
-      <br>
-      
-
-  {% endfor %}
-
-</div>
-
-  
-
-<script>
-
-    function getRequest() {
-
-      $('#submitButton').on('click', (evt) => {
-        evt.preventDefault(); //stops the post request form from submitting to the route and refreshing the page. prevents us from going to the .json and to just stay on the same page with the new content added
-
-        const formInputs = {
-          'place_id': $('#place_id').val(), 
-          'comment': $('#comment').val(), //grabs the value from id='comment'
-          'rating': $('#score option:selected').text()
-          // no need to grab date 
-        };
-
-        $.post('/neighborhoods/places.json', formInputs, (results) => {
-
-        var html = '<div> '+ 
-                    '<span id="first_name">  </span> <span id="last_name">' +
-                    '</span> <span id="user_status"> </span>' +
-                  '</div>' + 
-                  '<div> ' +
-                  '  <span id="created_date"> </span>' +
-                  '</div>' +
-                  '<div> ' +
-                  '  <span id="rating"> </span>' +
-                  '</div>' +
-                  '<div> ' +
-                  '  <span id="c_comment"> </span>' +
-                  '</div>' +
-                  '<br>' 
-
-          $('#comment_section').prepend(html);
-          
-          document.getElementById('first_name').innerHTML = results.user_first_name;
-          document.getElementById('last_name').innerHTML = results.user_last_name;
-          document.getElementById('user_status').innerHTML = "(" + results.user_status + ")";
-          document.getElementById('c_comment').innerHTML = "Comment: " + results.comment;
-          document.getElementById('rating').innerHTML = "Rating: " + results.rating;
-          document.getElementById('created_date').innerHTML = "Date: " + results.created_date;
-
-          document.getElementById('avg-rating').innerHTML = results.avg_rating;
-          document.getElementById('num-comments').innerHTML = results.comments_total;
-
-          $('#comment').val(''); // this clears the comment box 
-          
-         });
-
-
-      }
-      )}
-
-    getRequest();
-
-</script>
 
 
 

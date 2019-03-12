@@ -4,11 +4,8 @@
 
 <style>
 
-  div {
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
+.neighborhood-card {
+  margin:15px;
 }
 
 h2 { 
@@ -16,33 +13,60 @@ h2 {
 
 }
 
+.title {
+  text-align: center
+}
+
 </style>
 
-    <h2>Neighborhoods</h2>
 
-    <div id="neighborhood-list">
-      <div class="row">
-       {% for n in neighborhood %}
-        <div class="col-md-4">
-         <div class='card'>
 
-           <a href="/neighborhoods/{{ n.neighborhood_id }}"> <img class="card-img-top" style="height: 300px" src="{{ n.image_url }}">
-        
-            <div class='card-body'> 
-            
-           <h3>
-              <a href="/neighborhoods/{{ n.neighborhood_id }}">{{ n.name }}</a>
 
-           </h3>
-           
-            </div> 
-         </div>
-      </div>
 
-      {% endfor %}
 
+<div class='container-fluid'> 
+    <div class='row'>
+        <br>
+        <br>
      </div>
+
+     <div class="row">
+        <div class='col-md-4'>
+        </div>
+
+        <div class='col-md-4'>
+
+            <h2 class='title'>Neighborhoods</h2>
+        </div>
+
+          <div id="neighborhood-list">
+              <div class="row">
+               {% for n in neighborhood %}
+                <div class="col-md-3">
+
+                  <!-- <div class='new-cards'>
+
+                 <div class='card neighborhood-card'> -->
+
+                   <a href="/neighborhoods/{{ n.neighborhood_id }}"> <img class="card-img-top" style="height: 300px" src="{{ n.image_url }}">
+                   </a>
+                
+                    <!-- <div class='card-body'>  -->
+                    
+                       <h3 class='title'>
+                          <a href="/neighborhoods/{{ n.neighborhood_id }}">{{ n.name }}</a>
+                       </h3>
+                   
+                    </div> 
+                  <!-- </div> -->
+                <!-- </div> -->
+
+              {% endfor %}
+
+              </div>
+          </div>
     </div>
+
 
 {% endblock %}
 

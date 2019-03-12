@@ -1,9 +1,12 @@
-.carousel-vertical {
-  top: 50%;
-  transform: translateY(-50%);
-  bottom: initial;
+.caption-positioning {
+    top: 43%;
+    left: 10%;
+    transform: translateY(-50%);
+    bottom: initial;
+    right: initial;
 
 }
+
 
 
 
@@ -34,5 +37,11 @@ img:hover {
 img: {
     opacity: 1.0;
     filter: alpha(opacity=100);
+}
+
+.navbar {
+    position:absolute;
+    width: 100%;
+    background-color: transparent !important;
 }
 

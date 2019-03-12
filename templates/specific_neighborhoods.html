@@ -2,11 +2,38 @@
 
 {% block content %}
 
-<h2>{{ neighborhood_name }}</h2>
+<style>
+  
+  .carousel-item{
+
+    height: 300px;
+    overflow: hidden;
+    width: 100%;
+    }
+    .carousel-item img {
+    width: 100%;
+  }
+
+</style>
 
 
 <div class='container'> 
     <div class='row'>
+      <br>
+      <br>
+    </div>
+
+    <div class='row'>
+      <div class='col-md-4'>
+      </div>
+
+      <div class='col-md-4'>
+
+      <h2>{{ neighborhood_name }}</h2>
+      </div>
+    </div>
+
+      <div class='row'>
         <div class='col-md-6'>
 
         <img style="width:100%" src="{{ images }}">
@@ -98,6 +125,12 @@
   </div>     
 
         </div>
+
+            <div class='row'>
+      <br>
+      <br>
+    </div>
+
     </div>
 
   

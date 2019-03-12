@@ -1,36 +1,67 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h1>Login</h1>
+<style>
 
-  <form action="/login" method="POST">
+div{
+  text-align: center
+}
 
-    <div>
-      <label>Email:
-        <input type="email" name="email" required>
-      </label>
-    </div>
+</style>
 
-    <div>
-      <label>Password:
-        <input type="password" name="password" required>
-      </label>
-    </div>
+
+<div class='container'> 
+     <div class='row'>
+        <br>
+        <br>
+     </div>
     
+      <div class='row'>
 
-    <div>
-      <input type="submit" value="Log In">
+      <div class='col-md-4'> 
+      </div>
+
+      <div class='col-md-4'>
+
+      <h3>Login</h3>
+
+      <form action="/login" method="POST">
+
+          <div>
+            <label>Email:
+              <input type="email" name="email" required>
+            </label>
+          </div>
+
+          <div>
+            <label>Password:
+              <input type="password" name="password" required>
+            </label>
+          </div>
+        
+
+          <div>
+            <input type="submit" class="btn btn-primary" value="Log In">
+          </div>
+
+      </form>
+
+      <br>
+      <br>
+
+      <div>
+        Don't have an account?
+      <br>
+        <a href="/register">
+            <button type="button" class="btn btn-secondary">Create an account!
+            </button>
+        </a>
+      </div>
+
+      </div>
     </div>
+</div>
 
-  </form>
-
-    <div>
-    Dont't have an account?
-      <a href="/register">
-        <button type="button" class="btn btn-primary">Create an account!
-        </button>
-      </a>
-    </div>
 
   
 {% endblock %}
