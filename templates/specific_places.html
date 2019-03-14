@@ -3,65 +3,28 @@
 
 {% block content %}
 
-<style>
-  .comment-class {
-
-    background: rgba(255,255,255,0.5);
-    padding: 25px;
-    border-radius: 10px;
-    height: 100%;
-    margin-bottom: 15px ;
-  }
-
-  .ratings {
-    position: relative;
-    vertical-align: middle;
-    display: inline-block;
-    color: #b1b1b1;
-    overflow: hidden;
-}
-.full-stars {
-    position: absolute;
-    left: 0;
-    top: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    color: #fde16d;
-}
-.empty-stars:before, .full-stars:before {
-    content:"\2605\2605\2605\2605\2605";
-    font-size: 14pt;
-}
-.empty-stars:before {
-    -webkit-text-stroke: 1px #848484;
-}
-.full-stars:before {
-    -webkit-text-stroke: 1px orange;
-}
-/* Webkit-text-stroke is not supported on firefox or IE */
-
-/* Firefox */
- @-moz-document url-prefix() {
-    .full-stars {
-        color: #ECBE24;
-    }
-}
-/* IE */
- <!--[if IE]> .full-stars {
-    color: #ECBE24;
-}
-<![endif]-->
-
-
-</style>
 
 <div class="container">
-  <div class="row">
+
+    <div class="row">
     <br>
     <br>
   </div>
+
+  <div class="row">
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/neighborhoods">Neighborhoods</a></li>
+    <li class="breadcrumb-item"><a href="/neighborhoods/{{ neighborhood_id }}">{{ neighborhood_name}}</a></li>
+    <li class="breadcrumb-item"><a href="/neighborhoods/{{ neighborhood_id }}/places"> Places </a></li>
+  </ol>
+</nav>
+</div>
+
+
   <div class="row">
     <div class='col-md-12'>
+      
       <h2>{{ place_name }}</h2>
     </div>
   </div>
@@ -109,7 +72,9 @@
     </div>
     <div>
       <br>
+      <div class="specific-place-description">
       <p> {{ description }} </p>
+    </div>
     </div>
   </div>
   <div class="row">
@@ -138,9 +103,10 @@
             <label>Review:</label>
             <textarea class="form-control"  name="comment" id="comment" required></textarea>
           </div>
-      </div>
+      
       <br>
-      <button id="submitButton" type="submit" class="btn btn-lg btn-outline-dark mt-3">Submit review</button>
+      <button id="submitButton" type="submit" class="btn btn-lg btn-outline-dark mt-3 center-submit">Submit review</button>
+      </div>
       <br>
       </form>
 
@@ -155,10 +121,11 @@
         {% for comment in comments %}
         <div class='col-md-4' style='margin-bottom:30px'>
           <div class='comment-class'>
-        <div>{{comment.user['fname']}} {{comment.user['lname']}} ({{comment.user['status']}})</div>
-        <div>Date: {{comment['created_date'].strftime("%B %d, %Y")}}</div>
-        <div>Rating: {{comment['rating']}}</div>
-        <div>Comment: {{comment['comment']}}</div>
+        <div class='need-bold'>{{comment.user['fname']}} {{comment.user['lname']}} ({{comment.user['status']}})</div>
+        <div class='need-bold'>{{comment['created_date'].strftime("%B %d, %Y")}}</div>
+        <div class='need-bold'>Rating: {{comment['rating']}}</div>
+        <br>
+        <div class='need-bold'>{{comment['comment']}}</div>
       </div>
     </div>
         <br>
@@ -179,8 +146,10 @@
             };
         
             $.post('/neighborhoods/places.json', formInputs, (results) => {
-        
-            var html = '<div> '+ 
+            
+            var html = "<div class='col-md-4' style='margin-bottom:30px'>" +
+                        "<div class='comment-class need-bold'>" +
+                        '<div> '+ 
                         '<span id="first_name">  </span> <span id="last_name">' +
                         '</span> <span id="user_status"> </span>' +
                       '</div>' + 
@@ -193,6 +162,8 @@
                       '<div> ' +
                       '  <span id="c_comment"> </span>' +
                       '</div>' +
+                      "</div>" +
+                      "</div>" +
                       '<br>' 
         
               $('#comment_section').prepend(html);

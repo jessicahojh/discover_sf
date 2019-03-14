@@ -249,7 +249,7 @@ def specific_place_page(neighborhood_id, place_id):
     return render_template("specific_places.html", place_name=place_name, 
         description=description, neighborhood_id=neighborhood_id, place_id=place_id,
         comments=comments, avg_rating=avg_rating, num_comments=num_comments,
-        google_api_key=google_api_key, image_url=image_url)
+        google_api_key=google_api_key, image_url=image_url, neighborhood_name=neighborhood_name)
 
 
 @app.route('/places-location.json')

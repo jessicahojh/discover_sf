@@ -1,13 +1,41 @@
+/*Keeps Navbar transparent at the very top*/
+.navbar {
+    position:absolute;
+    width: 100%;
+    background-color: transparent !important;
+}
+
+.breadcrumb {
+    background-color: transparent !important; 
+}
+
+/*Homepage*/
+
+.caption {
+    color: #3b3e42;
+    font-size: 45px;
+    font-family: 'Cardo';
+}
+
 .caption-positioning {
     top: 43%;
     left: 10%;
     transform: translateY(-50%);
     bottom: initial;
     right: initial;
-
 }
 
+.n {
+    margin-bottom: 30px;
+}
 
+/*To center all Titles*/
+
+.page-title {
+  text-align: center;
+  color: #3b3e42;
+
+}
 
 
 .card {
@@ -17,16 +45,27 @@
   padding-left: 10px;
 }
 
-nav {
-    background-color:rgb(193, 224, 241);
+.place-description{
+    background: rgba(255,255,255,0.5);
+    padding: 25px;
+    border-radius: 10px;
+    height: 100%;
+    /*margin-bottom: 15px;*/
 }
 
-h1 h2 h3 h4 h5 {  
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20%;
-  font-family: 'Oswald', sans-serif;
+.carousel-item {
+
+    height: 300px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-item img {
+    width: 100%;
+}
+
+.title {
+    text-shadow: 2px 2px black;
 }
 
 img:hover {
@@ -39,9 +78,89 @@ img: {
     filter: alpha(opacity=100);
 }
 
-.navbar {
-    position:absolute;
-    width: 100%;
-    background-color: transparent !important;
+nav {
+    background-color:rgb(193, 224, 241);
 }
+
+.specific-place-description{
+    background: rgba(255,255,255,0.5);
+    padding: 25px;
+    border-radius: 10px;
+    height: 80%;
+    /*margin-bottom: 15px;*/
+}
+
+h1 h2 h3 h4 h5 {  
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+  font-family: 'Oswald', sans-serif;
+}
+
+
+.wrapper {
+  margin: 15px;
+}
+
+/*Specific Place Page with rating stars and comments*/
+
+.comment-class {
+
+    background: rgba(255,255,255,0.5);
+    padding: 25px;
+    border-radius: 10px;
+    height: 100%;
+    margin-bottom: 15px;
+  }
+
+.center-submit{
+    margin-left: 80px;
+}  
+
+.need-bold{
+    font-weight: bold;
+    font-family: 'Cardo';
+    color: #3b3e42;
+
+}
+
+.ratings {
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+    color: #b1b1b1;
+    overflow: hidden;
+}
+.full-stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #fde16d;
+}
+.empty-stars:before, .full-stars:before {
+    content:"\2605\2605\2605\2605\2605";
+    font-size: 14pt;
+}
+.empty-stars:before {
+    -webkit-text-stroke: 1px #848484;
+}
+.full-stars:before {
+    -webkit-text-stroke: 1px orange;
+}
+/* Webkit-text-stroke is not supported on firefox or IE */
+
+/* Firefox */
+ @-moz-document url-prefix() {
+    .full-stars {
+        color: #ECBE24;
+    }
+}
+/* IE */
+ <!--[if IE]> .full-stars {
+    color: #ECBE24;
+}
+<![endif]-->
 

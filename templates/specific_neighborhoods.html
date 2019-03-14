@@ -2,20 +2,6 @@
 
 {% block content %}
 
-<style>
-  
-  .carousel-item{
-
-    height: 300px;
-    overflow: hidden;
-    width: 100%;
-    }
-    .carousel-item img {
-    width: 100%;
-  }
-
-</style>
-
 
 <div class='container'> 
     <div class='row'>
@@ -29,7 +15,9 @@
 
       <div class='col-md-4'>
 
-      <h2>{{ neighborhood_name }}</h2>
+      <h2 class='page-title'>{{ neighborhood_name }}</h2>
+    
+      <br>
       </div>
     </div>
 
@@ -40,7 +28,7 @@
         <br>
         <br>
 
-        <div>
+        <div class="place-description">
             <p> {{ description }} </p>  
         </div>
 

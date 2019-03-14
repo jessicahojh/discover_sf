@@ -9,6 +9,15 @@
     <br>
   </div>
 
+    <div class="row">
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/neighborhoods">Neighborhoods</a></li>
+    <li class="breadcrumb-item"><a href="/neighborhoods/{{ neighborhood_id }}">{{ neighborhood_name}}</a></li>
+  </ol>
+</nav>
+</div>
+
   <div class='row'>
 
     <div class='col'>
@@ -95,9 +104,10 @@
 
       {% for comment in comments %}
 
-      <div>{{comment.user['fname']}} {{comment.user['lname']}} ({{comment.user['status']}})</div>
-      <div>Date: {{comment['created_date'].strftime("%B %d, %Y")}}</div>
-      <div>Comment: {{comment['comment']}}</div>
+      <div class='need-bold'>{{comment.user['fname']}} {{comment.user['lname']}} ({{comment.user['status']}})</div>
+      <div class='need-bold'>{{comment['created_date'].strftime("%B %d, %Y")}}</div>
+      <br>
+      <div class='need-bold'>{{comment['comment']}}</div>
       <br>
       <br>
 
@@ -144,7 +154,7 @@
           //               '<li class="list-group-item" id="c_comment"></li>' +
           //             '</ul>' +
           //           '</div>' +
-
+                      "<div class='need-bold' >" +
                       '<div>' + 
                       '<span id="first_name">  </span> <span id="last_name">' + 
                       '</span> <span id="user_status"> </span>' +
@@ -155,6 +165,7 @@
                       '<div>' + 
                       '<span id="c_comment"> </span>' +
                       '</div>' +
+                      "</div>" +
                       '<br>'
           
           $('#comment_section').prepend(html);

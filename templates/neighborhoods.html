@@ -2,72 +2,38 @@
 
 {% block content %}
 
-<style>
 
-.neighborhood-card {
-  margin:15px;
-}
+<div class='container-fluid'>
+<div class='row'>
+  <br>
+  <br>
+</div>
 
-h2 { 
-  color:rgb(164, 39, 24);
+<div class="row wrapper">
+  <div class='col-md-4'>
+  </div>
+  <div class='col-md-4'>
+    <h2 class='page-title'>Neighborhoods</h2>
+    <br>
+  </div>
+  <div id="neighborhood-list">
+    <div class="row">
+      {% for n in neighborhood %}
+      <div class="col-md-3 n">
+        <a href="/neighborhoods/{{ n.neighborhood_id }}"> <img class="card-img-top" style="height: 300px" src="{{ n.image_url }}">
+        </a>
+        <h3 class='title carousel-caption'>
+          {{n.name}}
+          <!-- <a href="/neighborhoods/{{ n.neighborhood_id }}">{{ n.name }}</a> -->
+          
+        </h3>
 
-}
-
-.title {
-  text-align: center
-}
-
-</style>
-
-
-
-
-
-
-<div class='container-fluid'> 
-    <div class='row'>
-        <br>
-        <br>
-     </div>
-
-     <div class="row">
-        <div class='col-md-4'>
-        </div>
-
-        <div class='col-md-4'>
-
-            <h2 class='title'>Neighborhoods</h2>
-        </div>
-
-          <div id="neighborhood-list">
-              <div class="row">
-               {% for n in neighborhood %}
-                <div class="col-md-3">
-
-                  <!-- <div class='new-cards'>
-
-                 <div class='card neighborhood-card'> -->
-
-                   <a href="/neighborhoods/{{ n.neighborhood_id }}"> <img class="card-img-top" style="height: 300px" src="{{ n.image_url }}">
-                   </a>
-                
-                    <!-- <div class='card-body'>  -->
-                    
-                       <h3 class='title'>
-                          <a href="/neighborhoods/{{ n.neighborhood_id }}">{{ n.name }}</a>
-                       </h3>
-                   
-                    </div> 
-                  <!-- </div> -->
-                <!-- </div> -->
-
-              {% endfor %}
-
-              </div>
-          </div>
+      </div>
+      {% endfor %}
     </div>
-
-
+  </div>
+</div>
 {% endblock %}
+
 
 
