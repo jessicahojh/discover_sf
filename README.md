@@ -108,7 +108,7 @@ Open localhost:5000 on browser.
 **Top 5 Most Popular Restaurants for a specific neighborhood:**
 <br/><br/>
 ![Top 5 Restaurants](/static/README/restaurants.gif)
-<br/>
+<br/> 
 
 <a name="features"/></a>
 ## Future Features
