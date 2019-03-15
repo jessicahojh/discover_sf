@@ -86,7 +86,7 @@ Open localhost:5000 on browser.
 
 **List of Neighborhoods:**
 <br/><br/>
-![Neighborhoods](/static/README/neighborhoods_screen_recording.mov)
+![Neighborhoods](/static/README/neighborhoods.gif)
 <br/>
 
 **View a specific neighborhood:**
