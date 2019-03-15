@@ -67,6 +67,10 @@ Store secrets.sh file in .gitignore file:
 ```
 secrets.sh
 ```
+Activate secrets.sh:
+```
+$ source secrets.sh
+```
 Run the app:
 ```
 $ python3 server.py
@@ -77,37 +81,33 @@ Open localhost:5000 on browser.
 ## Demo
 **Homepage:**
 <br/><br/>
-![Registration](/static/img/README/homepage.png)
+![Homepage](/static/README/homepage.png)
 <br/>
 
 **List of Neighborhoods:**
 <br/><br/>
-![Neighborhoods](/static/img/README/list_of_neighborhoods.png)
+![Neighborhoods](/static/README/neighborhoods_screen_recording.mov)
 <br/>
 
 **View a specific neighborhood:**
 <br/><br/>
-![View specific neighborhood](/static/img/README/specific_neighborhood.png)
+![View specific neighborhood](/static/README/specific_neighborhood.png)
 <br/>
 
 **View a specific neighborhood's list of "things-to-do/see":**
 <br/><br/>
-![View list of "things-to-do/see"](/static/img/README/things_to_do.png)
+![View list of "things-to-do/see"](/static/README/places_screen_recording.mov)
 <br/>
 
 **Specific place ("things-to-see") in a specific neighborhood:**
 <br/><br/>
-![View a specific place in a neighborhood](/static/img/README/specific_place.png)
+![View a specific place in a neighborhood](/static/README/specific_place_screen_recording.mov)
 <br/>
 
-**Comment section for the specific place:**
-<br/><br/>
-![Comment](/static/img/README/specific_place_comments.png)
-<br/>
 
 **Top 5 Most Popular Restaurants for a specific neighborhood:**
 <br/><br/>
-![Top 5 Restaurants](/static/img/README/restaurants.png)
+![Top 5 Restaurants](/static/README/restaurants_screen_recording.mov)
 <br/>
 
 <a name="features"/></a>
