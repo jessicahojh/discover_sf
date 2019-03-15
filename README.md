@@ -96,7 +96,7 @@ Open localhost:5000 on browser.
 
 **View a specific neighborhood's list of "things-to-do/see":**
 <br/><br/>
-![View list of "things-to-do/see"](/static/README/places.gif)
+![View list of "things-to-do/see"](/static/README/list_places.gif)
 <br/>
 
 **Specific place ("things-to-see") in a specific neighborhood:**
