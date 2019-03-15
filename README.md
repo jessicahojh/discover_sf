@@ -96,18 +96,18 @@ Open localhost:5000 on browser.
 
 **View a specific neighborhood's list of "things-to-do/see":**
 <br/><br/>
-![View list of "things-to-do/see"](/static/README/places_screen_recording.mov)
+![View list of "things-to-do/see"](/static/README/places.gif)
 <br/>
 
 **Specific place ("things-to-see") in a specific neighborhood:**
 <br/><br/>
-![View a specific place in a neighborhood](/static/README/specific_place_screen_recording.mov)
+![View a specific place in a neighborhood](/static/README/specific_place.gif)
 <br/>
 
 
 **Top 5 Most Popular Restaurants for a specific neighborhood:**
 <br/><br/>
-![Top 5 Restaurants](/static/README/restaurants_screen_recording.mov)
+![Top 5 Restaurants](/static/README/restaurants.gif)
 <br/>
 
 <a name="features"/></a>
