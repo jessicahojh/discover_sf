@@ -12,12 +12,12 @@ Discover San Francisco is a full stack web application that allows users to lear
 <a name="overview"/></a>
 ## Overview
 
+Once a user lands on the homepage, he or she can click the "Let's Explore" button to view the list of neighborhoods in San Francisco. The neighborhoods and their data is stored in a PostgreSQL database. A map image marking the specific location of a popular tourist attraction is shown when the user lands on the "specific place" page. The map with the marker is populated using the Google Maps API. This API is called with an AJAX request inserting the location's latitude and longitude. Users can also view the top 5 most popular restaurants for each neighborhood. This list is populated when a request is made to the Yelp API to get a JSON response with the specific parameters. Logged in users can contribute their thoughts by leaving a comment. Their comments are stored in a PostgreSQL database and displayed on the webpage when the user clicks "submit." The submit button has an event listener so that an AJAX request can be made to get the JSONIFY-ed data.
 
 <a name="techstack"/></a>
 ## Tech Stack
 **Frontend:** Javascript (AJAX, JSON), JQuery, Jinja, HTML, CSS, Bootstrap</br>
-**Backend:** Python, Flask, SQLAlchemy, PostgreSQL<br/>
-**Libraries:** <br/>
+**Backend:** Python, Flask, SQLAlchemy, PostgreSQL, jQuery<br/>
 **APIs:** Google, Yelp<br/>
 
 <a name="installation"/></a>
@@ -51,7 +51,7 @@ Create database:
 ```
 $ createdb sanfrancisco
 ```
-Seed fake data into the database tables:
+Seed data into the database tables:
 ```
 $ python3 seed.py
 ```
@@ -112,6 +112,6 @@ Open localhost:5000 on browser.
 
 <a name="features"/></a>
 ## Future Features
-* 
-*
-*
+* Using various APIs such as Zillow, weather, and Eventbright to provide housing, weather, and event info 
+* Marketplace for users to buy/sell or exchange services
+* Page for residents of specific neighborhoods to communicate with each other
