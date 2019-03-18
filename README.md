@@ -16,7 +16,7 @@ Once a user lands on the homepage, he or she can click the "Let's Explore" butto
 
 <a name="techstack"/></a>
 ## Tech Stack
-**Frontend:** Javascript (AJAX, JSON), jQuery, Jinja, HTML, CSS, Bootstrap</br>
+**Frontend:** Javascript, AJAX, JSON, jQuery, Jinja, HTML, CSS, Bootstrap</br>
 **Backend:** Python, Flask, SQLAlchemy, PostgreSQL<br/>
 **APIs:** Google, Yelp<br/>
 
