@@ -1,9 +1,7 @@
-"""Movie Ratings."""
-
 from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
-#from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Neighborhood, Restaurant_reaction, Place, Place_comment
 
@@ -266,6 +264,7 @@ def place_info():
             "p_long": place.p_long,
             "image_url": place.image_url
         }
+        
         for place in Place.query.all()}
 
 

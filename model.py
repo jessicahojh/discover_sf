@@ -1,5 +1,3 @@
-"""Models and database functions for Ratings project."""
-
 from flask_sqlalchemy import SQLAlchemy 
 from datetime import datetime
 from sqlalchemy.sql import func
