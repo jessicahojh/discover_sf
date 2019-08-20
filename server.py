@@ -18,6 +18,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_heroku import Heroku
 
 from server import db
+db = SQLAlchemy()
 #
 
 # from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
