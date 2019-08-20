@@ -1,4 +1,3 @@
-from flask_sqlalchemy import SQLAlchemy 
 from datetime import datetime
 from sqlalchemy.sql import func
 
@@ -125,16 +124,16 @@ class Place_comment(db.Model):
 ##############################################################################
 # Helper functions
 
-def connect_to_db(app):
-    """Connect the database to our Flask app."""
+# def connect_to_db(app):
+#     """Connect the database to our Flask app."""
 
-    # Configure to use our PostgreSQL database
-    # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///sanfrancisco'
-    # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    # db.app = app
-    # db.init_app(app)
-    heroku = Heroku(app)
-    db = SQLAlchemy(app)
+#     # Configure to use our PostgreSQL database
+#     # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///sanfrancisco'
+#     # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#     # db.app = app
+#     # db.init_app(app)
+#     heroku = Heroku(app)
+#     db = SQLAlchemy(app)
 
 
 # if __name__ == "__main__":

@@ -13,6 +13,13 @@ import os
 
 from datetime import datetime
 
+#
+from flask_sqlalchemy import SQLAlchemy
+from flask_heroku import Heroku
+
+from server import db
+#
+
 # from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 # from flask_dropzone import Dropzone
 
@@ -351,6 +358,18 @@ def yelp_api(neighborhood_name):
 
 #     return render_template("testing.html", data=data)
     
+#
+def connect_to_db(app):
+"""Connect the database to our Flask app."""
+
+# Configure to use our PostgreSQL database
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///sanfrancisco'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# db.app = app
+# db.init_app(app)
+heroku = Heroku(app)
+db = SQLAlchemy(app)
+#
     
 
 if __name__ == "__main__":
@@ -359,6 +378,8 @@ if __name__ == "__main__":
     app.debug = True
 
     connect_to_db(app)
+
+
 
     # Use the DebugToolbar
     #DebugToolbarExtension(app)
