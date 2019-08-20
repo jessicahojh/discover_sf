@@ -4,7 +4,7 @@ from sqlalchemy.sql import func
 from flask_sqlalchemy import SQLAlchemy
 from flask_heroku import Heroku
 
-from server import db
+# from server import db
 
 
 # This is the connection to the PostgreSQL database; we're getting this through
