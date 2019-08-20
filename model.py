@@ -5,6 +5,8 @@ from sqlalchemy.sql import func
 from flask_sqlalchemy import SQLAlchemy
 from flask_heroku import Heroku
 
+from server import db
+
 
 # This is the connection to the PostgreSQL database; we're getting this through
 # the Flask-SQLAlchemy helper library. On this, we can find the `session`

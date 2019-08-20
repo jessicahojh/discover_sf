@@ -55,18 +55,6 @@ Seed data into the database tables:
 ```
 $ python3 seed.py
 ```
-Create .gitignore file:
-```
-$ touch .gitignore
-```
-Access .gitignore file in terminal to ignore secrets.sh file:
-```
-$ nano .gitignore
-```
-Store secrets.sh file in .gitignore file:
-```
-secrets.sh
-```
 Activate secrets.sh:
 ```
 $ source secrets.sh
