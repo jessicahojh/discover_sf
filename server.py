@@ -3,9 +3,7 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
 # from flask_debugtoolbar import DebugToolbarExtension
 
-from model import User, Neighborhood, Restaurant_reaction, Place, Place_comment
-
-#from model import connect_to_db, db
+from model import connect_to_db, db, User, Neighborhood, Restaurant_reaction, Place, Place_comment
 
 import requests
 import json
@@ -15,20 +13,8 @@ import os
 
 from datetime import datetime
 
-# added
-from flask_sqlalchemy import SQLAlchemy
-from flask_heroku import Heroku
-
-
-db = SQLAlchemy()
-#
-
-# from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
-# from flask_dropzone import Dropzone
-
 
 app = Flask(__name__)
-
 
 
 # Required to use Flask sessions and the debug toolbar
@@ -361,18 +347,6 @@ def yelp_api(neighborhood_name):
 
 #     return render_template("testing.html", data=data)
     
-#
-def connect_to_db(app):
-    """Connect the database to our Flask app."""
-
-# Configure to use our PostgreSQL database
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///sanfrancisco'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# db.app = app
-# db.init_app(app)
-heroku = Heroku(app)
-db = SQLAlchemy(app)
-#
     
 
 if __name__ == "__main__":
@@ -382,11 +356,10 @@ if __name__ == "__main__":
 
     connect_to_db(app)
 
-
-
     # Use the DebugToolbar
     #DebugToolbarExtension(app)
 
+    # app.run()
     app.run(host="0.0.0.0")
 
 

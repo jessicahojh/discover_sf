@@ -2,17 +2,16 @@ from datetime import datetime
 from sqlalchemy.sql import func
 
 from flask_sqlalchemy import SQLAlchemy
-from flask_heroku import Heroku
+# from flask_heroku import Heroku
 
-from server import db
+#from server import db
 
 
 # This is the connection to the PostgreSQL database; we're getting this through
 # the Flask-SQLAlchemy helper library. On this, we can find the `session`
 # object, where we do most of our interactions (like committing, etc.)
 
-#orig was there
-# db = SQLAlchemy()
+db = SQLAlchemy()
 
 
 
@@ -125,22 +124,22 @@ class Place_comment(db.Model):
 ##############################################################################
 # Helper functions
 
-# def connect_to_db(app):
-#     """Connect the database to our Flask app."""
+def connect_to_db(app):
+    """Connect the database to our Flask app."""
 
-#     # Configure to use our PostgreSQL database
-#     # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///sanfrancisco'
-#     # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#     # db.app = app
-#     # db.init_app(app)
-#     heroku = Heroku(app)
-#     db = SQLAlchemy(app)
+    #Configure to use our PostgreSQL database
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///sanfrancisco'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.app = app
+    db.init_app(app)
+    # heroku = Heroku(app)
+    # db = SQLAlchemy(app)
 
 
-# if __name__ == "__main__":
-#     # As a convenience, if we run this module interactively, it will leave
-#     # you in a state of being able to work with the database directly.
+if __name__ == "__main__":
+    # As a convenience, if we run this module interactively, it will leave
+    # you in a state of being able to work with the database directly.
 
-#     from server import app
-#     connect_to_db(app)
-#     print("Connected to DB.")
+    from server import app
+    connect_to_db(app)
+    print("Connected to DB.")
