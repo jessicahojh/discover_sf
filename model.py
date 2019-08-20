@@ -1,8 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy 
 from datetime import datetime
 from sqlalchemy.sql import func
-from flask import heroku
-import heroku
+
+from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.heroku import Heroku
 
 
 # This is the connection to the PostgreSQL database; we're getting this through
