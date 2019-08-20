@@ -18,6 +18,7 @@ from datetime import datetime
 
 
 app = Flask(__name__)
+heroku = Heroku(app)
 
 
 # Required to use Flask sessions and the debug toolbar
