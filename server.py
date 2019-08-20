@@ -16,15 +16,9 @@ from datetime import datetime
 # from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 # from flask_dropzone import Dropzone
 
-# from flask.ext.sqlalchemy import SQLAlchemy
-
-# from flask.ext.heroku import Heroku
-
 
 app = Flask(__name__)
 
-heroku = Heroku(app)
-db = SQLAlchemy(app)
 
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = "ABC"

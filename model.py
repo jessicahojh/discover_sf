@@ -10,6 +10,7 @@ from sqlalchemy.sql import func
 db = SQLAlchemy()
 
 
+
 ##############################################################################
 # Model definitions
 
