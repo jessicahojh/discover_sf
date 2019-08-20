@@ -3,7 +3,9 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
 # from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, db, User, Neighborhood, Restaurant_reaction, Place, Place_comment
+from model import User, Neighborhood, Restaurant_reaction, Place, Place_comment
+
+#from model import connect_to_db, db
 
 import requests
 import json
@@ -13,11 +15,11 @@ import os
 
 from datetime import datetime
 
-#
+# added
 from flask_sqlalchemy import SQLAlchemy
 from flask_heroku import Heroku
 
-from server import db
+
 db = SQLAlchemy()
 #
 
